@@ -2749,7 +2749,7 @@ GameObject:
   - component: {fileID: -101498072423896185}
   - component: {fileID: -663475883516494086}
   - component: {fileID: -2886351195332296066}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Character_Goblin_Warrior_Male_FixedScale 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

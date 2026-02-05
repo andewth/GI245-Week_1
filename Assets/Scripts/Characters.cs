@@ -1,3 +1,4 @@
+using System.Numerics;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -31,10 +32,42 @@ public abstract class Character : MonoBehaviour
 
     public void SetState(CharState newState)
     {
+
         if (state == newState)
             return;
 
         state = newState;
+
+        if (state == CharState.Idle)
+        {
+            navAgent.isStopped = true;
+            navAgent.ResetPath();
+        }
+        else if (state == CharState.Walk)
+        {
+            navAgent.isStopped = false;
+        }
+    }
+
+
+    public void WalkPosition(Vector3 position)
+    {
+        if (navAgent == null)
+            return;
+
+        navAgent.isStopped = false;
+        navAgent.SetDestination(position);
+        SetState(CharState.Walk);
+    }
+
+
+    protected void WalkUpdate()
+    {
+        float distance = Vector3.Distance(transform.position, navAgent.destination);
+        if (distance <= navAgent.stoppingDistance)
+        {
+            SetState(CharState.Idle);
+        }
     }
     
 }
