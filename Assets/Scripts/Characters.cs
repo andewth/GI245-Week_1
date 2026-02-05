@@ -50,20 +50,21 @@ public abstract class Character : MonoBehaviour
     }
 
 
-    public void WalkPosition(Vector3 position)
+    public void WalkPosition(UnityEngine.Vector3 dest) // ระบุชื่อเต็มหน้า Vector3
     {
-        if (navAgent == null)
-            return;
+        if (navAgent != null)
+        {
+            navAgent.isStopped = false;
+            navAgent.SetDestination(dest);
+        }
 
-        navAgent.isStopped = false;
-        navAgent.SetDestination(position);
         SetState(CharState.Walk);
     }
 
 
     protected void WalkUpdate()
     {
-        float distance = Vector3.Distance(transform.position, navAgent.destination);
+        float distance = UnityEngine.Vector3.Distance(transform.position, navAgent.destination);
         if (distance <= navAgent.stoppingDistance)
         {
             SetState(CharState.Idle);
