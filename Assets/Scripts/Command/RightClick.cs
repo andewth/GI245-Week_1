@@ -1,4 +1,10 @@
+using System.IO.Compression;
 using UnityEngine;
+using Vector3 = UnityEngine.Vector3;
+using UVector3 = UnityEngine.Vector3;
+using SVector3 = System.Numerics.Vector3;
+
+
 
 public class RightClick : MonoBehaviour
 {
@@ -40,6 +46,8 @@ public class RightClick : MonoBehaviour
         {
             curChar.WalkPosition(hit.point);
         }
+
+        CreateVFX(hit.point, VFXManager.Instance.DoubleRingMarker);
     }
 
 
@@ -55,7 +63,35 @@ public class RightClick : MonoBehaviour
                 case "Ground":
                     CommandToWalk(hit, leftClick.CurChar);
                     break;
+
+                case "Enemy":
+                    CommandToAttack(hit, leftClick.CurChar);
+                    break;
             }
         }
     }
+
+
+    private void CreateVFX(UVector3 pos, GameObject vfxPrefab)
+    {
+        if (vfxPrefab != null)
+        {
+            Instantiate(vfxPrefab, pos, Quaternion.identity);
+        }
+    }
+
+    
+    private void CommandToAttack(RaycastHit hit, Character c)
+    {
+        if (c == null)
+            return;
+
+        Character target = hit.collider.GetComponent<Character>();
+        Debug.Log("Attack: " + target);
+
+        if (target != null)
+            c.ToAttackCharacter(target);
+    }
+    
+
 }

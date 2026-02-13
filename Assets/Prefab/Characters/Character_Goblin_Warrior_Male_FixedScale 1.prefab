@@ -2749,6 +2749,7 @@ GameObject:
   - component: {fileID: -101498072423896185}
   - component: {fileID: -663475883516494086}
   - component: {fileID: -2886351195332296066}
+  - component: {fileID: 1749234957971277407}
   m_Layer: 6
   m_Name: Character_Goblin_Warrior_Male_FixedScale 1
   m_TagString: Untagged
@@ -2882,6 +2883,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   state: 0
   ringSelection: {fileID: 7314918156093145415}
+  curHP: 10
+  attackDamage: 3
+  attackRange: 2
+  attackCooldown: 2
+  attackTimer: 0
+  findingRange: 20
+  curCharTarget: {fileID: 0}
+--- !u!114 &1749234957971277407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1475337874035606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9997f002431f2748a9705d33d6272d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AttackAI
+  curEnemy: {fileID: 0}
 --- !u!1 &1482556891744010
 GameObject:
   m_ObjectHideFlags: 0
