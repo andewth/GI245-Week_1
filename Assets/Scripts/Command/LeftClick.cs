@@ -1,16 +1,19 @@
 using System.Numerics;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using System.Collections.Generic;
 
 public class LeftClick : MonoBehaviour
 {
     private Camera cam;
 
-
-    [SerializeField] private Character curChar;
-    public Character CurChar { get { return curChar; } }
-
-
     [SerializeField] private LayerMask layerMask;
+
+
+    [SerializeField] private RectTransform boxSelection;
+    private UnityEngine.Vector2 oldAnchoredPos;
+    private UnityEngine.Vector2 startPos;
+
 
     public static LeftClick instance;
 
@@ -19,32 +22,51 @@ public class LeftClick : MonoBehaviour
         instance = this;
         cam = Camera.main;
         layerMask = LayerMask.GetMask("Ground", "Character", "Building", "Item");
+
+        boxSelection = UIManager.instance.SelectionBox;
     }
 
 
     void Update()
     {
-
+        // mouse down (เมื่อเริ่มคลิก)
         if (Input.GetMouseButtonDown(0))
         {
+            startPos = Input.mousePosition;
+
+            //if click UI, don't clear (ถ้าคลิกโดน UI ไม่ต้องทำอะไร)
+            if (EventSystem.current.IsPointerOverGameObject())
+                return;
+
             ClearEverything();
         }
 
-        if (Input.GetMouseButtonDown(0))
+        // mouse hold down (เมื่อกดค้างเพื่อลาก)
+        if (Input.GetMouseButton(0))
         {
+            //if click UI, don't check
+            if (EventSystem.current.IsPointerOverGameObject())
+                return;
+
+            UpdateSelectionBox(Input.mousePosition);
+        }
+
+        // mouse up (เมื่อปล่อยเมาส์)
+        if (Input.GetMouseButtonUp(0))
+        {
+            ReleaseSelectionBox(Input.mousePosition);
             TrySelect(Input.mousePosition);
         }
     }
 
 
-    void SelectCharacter(RaycastHit hit)
+    private void SelectCharacter(RaycastHit hit)
     {
-        curChar = hit.collider.GetComponent<Character>();   
+        Character hero = hit.collider.GetComponent<Character>();
+        Debug.Log("Selected Char: " + hit.collider.gameObject);
 
-        if (curChar != null)
-        {
-            curChar.ToggleRingSelection(true);
-        }
+        PartyManager.instance.SelectChars.Add(hero);
+        hero.ToggleRingSelection(true);
     }
 
     void TrySelect(UnityEngine.Vector2 screenPos)
@@ -66,9 +88,9 @@ public class LeftClick : MonoBehaviour
 
     void ClearRingSelection()
     {
-        if (curChar != null)
+        foreach (Character hero in PartyManager.instance.SelectChars)
         {
-            curChar.ToggleRingSelection(false);
+            hero.ToggleRingSelection(false);
         }
     }
 
@@ -76,6 +98,53 @@ public class LeftClick : MonoBehaviour
     void ClearEverything()
     {
         ClearRingSelection();
-        curChar = null;
+        PartyManager.instance.SelectChars.Clear();
+    }
+
+
+    private void UpdateSelectionBox(UnityEngine.Vector2 mousePos)
+    {
+        //Debug.Log("Mouse Pos - " + mousePos);
+        if (!boxSelection.gameObject.activeInHierarchy)
+            boxSelection.gameObject.SetActive(true);
+
+        float width = mousePos.x - startPos.x;
+        float height = mousePos.y - startPos.y;
+
+        boxSelection.anchoredPosition = startPos + new UnityEngine.Vector2(width / 2, height / 2);
+
+        width = Mathf.Abs(width);
+        height = Mathf.Abs(height);
+
+        boxSelection.sizeDelta = new UnityEngine.Vector2(width, height);
+
+        //store old position for real unit selection
+        oldAnchoredPos = boxSelection.anchoredPosition;
+    }
+
+
+    private void ReleaseSelectionBox(UnityEngine.Vector2 mousePos)
+    {
+        //Debug.Log("Step 2 - " + Release Mouse);
+        UnityEngine.Vector2 corner1; //down-left corner
+        UnityEngine.Vector2 corner2; //top-right corner
+
+        boxSelection.gameObject.SetActive(false);
+
+        corner1 = oldAnchoredPos - (boxSelection.sizeDelta / 2);
+        corner2 = oldAnchoredPos + (boxSelection.sizeDelta / 2);
+
+        foreach (Character member in PartyManager.instance.Members)
+        {
+            UnityEngine.Vector2 unitPos = cam.WorldToScreenPoint(member.transform.position);
+
+            if ((unitPos.x > corner1.x && unitPos.x < corner2.x)
+                && (unitPos.y > corner1.y && unitPos.y < corner2.y))
+            {
+                PartyManager.instance.SelectChars.Add(member);
+                member.ToggleRingSelection(true);
+            }
+        }
+        boxSelection.sizeDelta = new UnityEngine.Vector2(0, 0); //clear Selection Box's size;
     }
 }

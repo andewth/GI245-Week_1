@@ -3,6 +3,7 @@ using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
 using UVector3 = UnityEngine.Vector3;
 using SVector3 = System.Numerics.Vector3;
+using System.Collections.Generic;
 
 
 
@@ -14,12 +15,6 @@ public class RightClick : MonoBehaviour
     private Camera cam;
 
 
-    private LeftClick leftClick;
-
-
-    void Awake() {
-        leftClick = GetComponent<LeftClick>();
-    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -40,11 +35,11 @@ public class RightClick : MonoBehaviour
     }
 
 
-    void CommandToWalk(RaycastHit hit, Character curChar)
+    void CommandToWalk(RaycastHit hit, List<Character> heros)
     {
-        if (curChar != null)
+        foreach (Character c in heros)
         {
-            curChar.WalkPosition(hit.point);
+            c.WalkPosition(hit.point);
         }
 
         CreateVFX(hit.point, VFXManager.Instance.DoubleRingMarker);
@@ -61,11 +56,11 @@ public class RightClick : MonoBehaviour
             switch (hit.collider.tag)
             {
                 case "Ground":
-                    CommandToWalk(hit, leftClick.CurChar);
+                    CommandToWalk(hit, PartyManager.instance.SelectChars);
                     break;
 
                 case "Enemy":
-                    CommandToAttack(hit, leftClick.CurChar);
+                    CommandToAttack(hit, PartyManager.instance.SelectChars);
                     break;
             }
         }
@@ -81,16 +76,15 @@ public class RightClick : MonoBehaviour
     }
 
     
-    private void CommandToAttack(RaycastHit hit, Character c)
+    private void CommandToAttack(RaycastHit hit, List<Character> heros)
     {
-        if (c == null)
-            return;
-
         Character target = hit.collider.GetComponent<Character>();
         Debug.Log("Attack: " + target);
 
-        if (target != null)
-            c.ToAttackCharacter(target);
+        foreach (Character h in heros)
+        {
+            h.ToAttackCharacter(target);
+        }
     }
     
 
