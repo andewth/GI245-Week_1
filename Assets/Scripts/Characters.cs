@@ -2,6 +2,7 @@ using System.Numerics;
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
+using System.Collections.Generic;
 using Vector3 = UnityEngine.Vector3;
 using UVector3 = UnityEngine.Vector3;
 using SVector3 = System.Numerics.Vector3;
@@ -12,6 +13,8 @@ public enum CharState
     Walk,
     WalkToEnemy,
     Attack,
+    WalkToMagicCast,
+    MagicCast,
     Hit,
     Die
 }
@@ -60,11 +63,37 @@ public abstract class Character : MonoBehaviour
     public Character CurCharTarget { get { return curCharTarget; } set { curCharTarget = value; } }
 
 
+    [SerializeField]
+    protected List<Magic> magicSkills = new List<Magic>();
+    public List<Magic> MagicSkills
+    { get { return magicSkills; } set { magicSkills = value; } }
+
+    [SerializeField]
+    protected Magic curMagicCast = null;
+    public Magic CurMagicCast
+    { get { return curMagicCast; } set { curMagicCast = value; } }
+
+    [SerializeField]
+    protected bool isMagicMode = false;
+    public bool IsMagicMode
+    { get { return isMagicMode; } set { isMagicMode = value; } }
+
+    protected VFXManager vfxManager;
+    protected UIManager uiManager;
 
 
-    private void Awake() {
+
+    private void Awake() 
+    {
         navAgent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
+    }
+
+
+    public void charInit(VFXManager vfxM, UIManager uiM)
+    {
+        vfxManager = vfxM;
+        uiManager = uiM;
     }
 
 
@@ -129,7 +158,12 @@ public abstract class Character : MonoBehaviour
         navAgent.SetDestination(target.transform.position);
         navAgent.isStopped = false;
 
-        SetState(CharState.WalkToEnemy);
+        if (isMagicMode)
+        {
+            SetState(CharState.WalkToMagicCast);
+        } else {
+            SetState(CharState.WalkToEnemy);
+        }
     }
 
 
@@ -213,12 +247,25 @@ public abstract class Character : MonoBehaviour
     }
 
 
-    public void ReceiveDamage(Character enemy)
+    // public void ReceiveDamage(Character enemy)
+    // {
+    //     if (curHP <= 0 || state == CharState.Die)
+    //         return;
+
+    //     curHP -= enemy.attackDamage;
+    //     if (curHP <= 0)
+    //     {
+    //         curHP = 0;
+    //         Die();
+    //     }
+    // }
+
+    public void ReceiveDamage(int damage)
     {
         if (curHP <= 0 || state == CharState.Die)
             return;
 
-        curHP -= enemy.attackDamage;
+        curHP -= damage;
         if (curHP <= 0)
         {
             curHP = 0;
@@ -233,7 +280,7 @@ public abstract class Character : MonoBehaviour
         
         if (target != null)
         {
-            target.ReceiveDamage(this);
+            target.ReceiveDamage(attackDamage);
         }
     }
 
@@ -250,4 +297,81 @@ public abstract class Character : MonoBehaviour
 
         return false;
     }
+
+
+    protected void MagicCastLogic(Magic magic)
+    {
+        Character target = curCharTarget.GetComponent<Character>();
+
+        if (target != null)
+            target.ReceiveDamage(magic.Power);
+    }
+
+
+    private IEnumerator ShootMagicCast(Magic curMagicCast)
+    {
+        if (vfxManager != null)
+            vfxManager.ShootMagic(curMagicCast.ShootID,
+                                transform.position,
+                                curCharTarget.transform.position,
+                                curMagicCast.ShootTime);
+
+        yield return new WaitForSeconds(curMagicCast.ShootTime);
+
+        //cast logic
+        MagicCastLogic(curMagicCast);
+        isMagicMode = false;
+
+        SetState(CharState.Idle);
+
+        if (uiManager != null)
+           uiManager.IsOnCurToggleMagic(false); 
+    }
+
+
+    private IEnumerator LoadMagicCast(Magic curMagicCast)
+    {
+        if (vfxManager != null)
+            vfxManager.LoadMagic(curMagicCast.LoadID,
+                                transform.position,
+                                curMagicCast.LoadTime);
+
+        yield return new WaitForSeconds(curMagicCast.LoadTime);
+
+        StartCoroutine(ShootMagicCast(curMagicCast));
+    }
+
+
+    private void MagicCast(Magic curMagicCast)
+    {
+        transform.LookAt(curCharTarget.transform);
+        anim.SetTrigger("MagicAttack");
+
+        StartCoroutine(LoadMagicCast(curMagicCast));
+    }
+
+
+    protected void WalkToMagicCastUpdate()
+    {
+        if (curCharTarget == null || curMagicCast == null)
+        {
+            SetState(CharState.Idle);
+            return;
+        }
+
+        navAgent.SetDestination(curCharTarget.transform.position);
+
+        float distance = Vector3.Distance(transform.position,
+                                        curCharTarget.transform.position);
+
+        if (distance <= curMagicCast.Range)
+        {
+            navAgent.isStopped = true;
+            SetState(CharState.MagicCast);
+
+            MagicCast(curMagicCast);
+        }
+    }
+
+
 }
