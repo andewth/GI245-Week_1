@@ -311,10 +311,14 @@ public abstract class Character : MonoBehaviour
     private IEnumerator ShootMagicCast(Magic curMagicCast)
     {
         if (vfxManager != null)
+        {
+            Vector3 chestPosition = curCharTarget.transform.position + new Vector3(0, 1.2f, 0);
+
             vfxManager.ShootMagic(curMagicCast.ShootID,
-                                transform.position,
-                                curCharTarget.transform.position,
-                                curMagicCast.ShootTime);
+                                    transform.position,
+                                    chestPosition,
+                                    curMagicCast.ShootTime);
+        }
 
         yield return new WaitForSeconds(curMagicCast.ShootTime);
 
