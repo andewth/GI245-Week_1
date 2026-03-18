@@ -18,6 +18,15 @@ public class UIManager : MonoBehaviour
     int curToggleMagicID = -1;
 
 
+    [SerializeField] private GameObject blackImage;
+
+    [SerializeField] private GameObject inventoryPanel;
+
+
+    [SerializeField] private GameObject itemUIPrefab;
+    [SerializeField] private GameObject[] slots;
+
+
     public static UIManager instance;
 
 
@@ -80,6 +89,7 @@ public class UIManager : MonoBehaviour
             toggleMagic[i].interactable = true;
             toggleMagic[i].isOn = false;
             toggleMagic[i].GetComponentInChildren<Text>().text = hero.MagicSkills[i].Name;
+            toggleMagic[i].targetGraphic.GetComponent<Image>().sprite = hero.MagicSkills[i].Icon;
         }
     }
 
@@ -96,5 +106,59 @@ public class UIManager : MonoBehaviour
         toggleMagic[curToggleMagicID].isOn = flag;
     }
     
+
+    public void ToggleInventoryPanel()
+    {
+        if (!inventoryPanel.activeInHierarchy)
+        {
+            inventoryPanel.SetActive(true);
+            blackImage.SetActive(true);
+            ShowInventory();
+        } else
+        {
+            inventoryPanel.SetActive(false);
+            blackImage.SetActive(false);
+            ClearInventory();
+        }
+    }
+
+
+    public void ClearInventory()
+    {
+        foreach (GameObject slot in slots)
+        {
+            if (slot == null) continue;
+
+            // วนลูปจนกว่าลูกจะหมด (ปลอดภัยกว่า GetChild(0))
+            while (slot.transform.childCount > 0)
+            {
+                Transform child = slot.transform.GetChild(0);
+                
+                // ยกเลิกการเชื่อมต่อกับ Inspector ก่อนลบ (ช่วยลด Error นี้ได้)
+                child.SetParent(null); 
+                Destroy(child.gameObject);
+            }
+        }
+    }
+
+
+    public void ShowInventory()
+    {
+        if (PartyManager.instance.SelectChars.Count <= 0)
+            return;
+
+        //Show Inventory only the single selected hero
+        Character hero = PartyManager.instance.SelectChars[0];
+
+        //Show items
+        for (int i = 0; i < hero.InventoryItems.Length; i++)
+        {
+            if (hero.InventoryItems[i] != null)
+            {
+                GameObject itemObj = Instantiate(itemUIPrefab, slots[i].transform);
+                itemObj.GetComponent<Image>().sprite = hero.InventoryItems[i].Icon;
+            }
+        }
+    }
 
 }
