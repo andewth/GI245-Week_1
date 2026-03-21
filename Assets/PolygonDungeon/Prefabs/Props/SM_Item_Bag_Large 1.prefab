@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1513284352239356013}
   - component: {fileID: 2499391744096683976}
   - component: {fileID: 381513790631293698}
+  - component: {fileID: 8379623415407949431}
   m_Layer: 0
   m_Name: SM_Item_Bag_Large 1
   m_TagString: Untagged
@@ -90,3 +91,21 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &8379623415407949431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2183001951008068311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f91a0f6d468c1fe41a36ac7dbde8d18a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ItemPick
+  item:
+    id: 0
+    itemName: 
+    type: 0
+    icon: {fileID: 0}
+    power: 0
