@@ -36,6 +36,21 @@ public class UIManager : MonoBehaviour
     }
 
 
+    void Start()
+    {
+        InitSlots();
+    }
+
+
+    private void InitSlots()
+    {
+        for (int i = 0; i < InventoryManager.MAXSLOT; i++)
+        {
+            slots[i].GetComponent<InventorySlot>().ID = i;
+        }
+    }
+
+
     void Update() {
         if (Input.GetKeyDown(KeyCode.Space))
             togglePauseUnpause.isOn = !togglePauseUnpause.isOn;
@@ -157,6 +172,11 @@ public class UIManager : MonoBehaviour
             {
                 GameObject itemObj = Instantiate(itemUIPrefab, slots[i].transform);
                 itemObj.GetComponent<Image>().sprite = hero.InventoryItems[i].Icon;
+            
+                ItemDrag itemDrag = itemObj.GetComponent<ItemDrag>();
+                itemDrag.Item = hero.InventoryItems[i];
+                itemDrag.IconParent = slots[i].transform;
+                itemDrag.Image.sprite = hero.InventoryItems[i].Icon;
             }
         }
     }

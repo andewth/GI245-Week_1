@@ -81,7 +81,8 @@ public abstract class Character : MonoBehaviour
 
     [Header("Inventory")]
     [SerializeField] protected Item[] inventoryItems;
-    public Item[] InventoryItems => inventoryItems;
+    public Item[] InventoryItems
+    { get { return inventoryItems; } set { inventoryItems = value; } }
 
 
     [SerializeField] protected Item mainWeapon;
@@ -95,6 +96,8 @@ public abstract class Character : MonoBehaviour
     protected VFXManager vfxManager;
     protected UIManager uiManager;
 
+    protected InventoryManager invManager;
+
 
 
     private void Awake() 
@@ -104,12 +107,13 @@ public abstract class Character : MonoBehaviour
     }
 
 
-    public void CharInit(VFXManager vfxM, UIManager uiM)
+    public void CharInit(VFXManager vfxM, UIManager uiM, InventoryManager invM)
     {
         vfxManager = vfxM;
         uiManager = uiM;
+        invManager = invM;
 
-        inventoryItems = new Item[16];
+        inventoryItems = new Item[InventoryManager.MAXSLOT];
     }
 
 
@@ -252,16 +256,17 @@ public abstract class Character : MonoBehaviour
     }
 
 
-    protected void Die()
+    protected virtual void Die()
     {
-        
         navAgent.isStopped = true;
         SetState(CharState.Die);
 
         anim.SetTrigger("Die");
+
+        invManager.SpawnDropInventory(inventoryItems, transform.position);
+
         StartCoroutine(DestroyObject());
     }
-
 
     // public void ReceiveDamage(Character enemy)
     // {
@@ -392,6 +397,7 @@ public abstract class Character : MonoBehaviour
             MagicCast(curMagicCast);
         }
     }
+
 
 
 }

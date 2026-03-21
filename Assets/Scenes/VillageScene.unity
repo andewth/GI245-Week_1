@@ -3167,7 +3167,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2896303167535106360, guid: b9cad8a63047237408fc0ee57ac87657, type: 3}
       propertyPath: attackDamage
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2896303167535106360, guid: b9cad8a63047237408fc0ee57ac87657, type: 3}
       propertyPath: magicSkills.Array.size
@@ -4087,6 +4087,7 @@ GameObject:
   - component: {fileID: 610531721}
   - component: {fileID: 610531722}
   - component: {fileID: 610531723}
+  - component: {fileID: 610531724}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -4192,7 +4193,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c1f722a5df25c44dbac06f698bdacaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InventoryManager
-  itemPrefabs: []
+  itemPrefabs:
+  - {fileID: 2183001951008068311, guid: e88b71b608200ce418f40f3bd34245be, type: 3}
+  - {fileID: 157152, guid: 432f5f8439a91ea4582c39bb83ad59e3, type: 3}
   itemData:
   - {fileID: 11400000, guid: 9b5862de54c6165429870d67d58eb398, type: 2}
   - {fileID: 11400000, guid: d7f4283470d9bb747a73fac678866b56, type: 2}
@@ -4204,6 +4207,20 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a6bfd3dc2ed889245b8cad2073cbec59, type: 2}
   - {fileID: 11400000, guid: 8afcb8a85cf5190459b0e9ac920f6fa0, type: 2}
   - {fileID: 11400000, guid: 2a1e5c86b944c8a48aaf63e9337e7537, type: 2}
+--- !u!114 &610531724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 610531717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65bf3db6961d96d4ea91b016176f295f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyManager
+  monsters:
+  - {fileID: 1071277296}
 --- !u!1001 &611084552
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6464,6 +6481,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f64e7c09241770a41a76fa9d0718ed7b, type: 3}
+--- !u!114 &1071277296 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -2886351195332296066, guid: 2d8fb3ec7b6be93449c38541d369ad56, type: 3}
+  m_PrefabInstance: {fileID: 206448365}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ada436437d1a9549ad7641b5888eb20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Enemy
 --- !u!1001 &1089131626
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7368,7 +7396,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -373569906862486889, guid: 75ce277f87b76c042a3aa43e83d6460a, type: 3}
       propertyPath: attackDamage
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1428387009061096, guid: 75ce277f87b76c042a3aa43e83d6460a, type: 3}
       propertyPath: m_Name
