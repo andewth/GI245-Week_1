@@ -3167,7 +3167,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2896303167535106360, guid: b9cad8a63047237408fc0ee57ac87657, type: 3}
       propertyPath: attackDamage
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2896303167535106360, guid: b9cad8a63047237408fc0ee57ac87657, type: 3}
       propertyPath: magicSkills.Array.size
