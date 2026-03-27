@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 453130}
   - component: {fileID: 3320336}
   - component: {fileID: 2391754}
-  - component: {fileID: 64173581108920664}
   - component: {fileID: -4205381738924547353}
+  - component: {fileID: 64173581108920664}
   m_Layer: 0
   m_Name: SM_Item_Potion_03 1
   m_TagString: Untagged
@@ -92,6 +92,24 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-4205381738924547353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 157152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f91a0f6d468c1fe41a36ac7dbde8d18a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ItemPick
+  item:
+    id: 1
+    itemName: Potion
+    type: 0
+    icon: {fileID: 21300000, guid: 71597b0e2385e5c4097f3b21fd250cbb, type: 3}
+    power: 0
 --- !u!64 &64173581108920664
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -114,21 +132,3 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 43835747619174404, guid: 3283ced519e050643acb46aa655023ae, type: 2}
---- !u!114 &-4205381738924547353
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 157152}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f91a0f6d468c1fe41a36ac7dbde8d18a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ItemPick
-  item:
-    id: 0
-    itemName: 
-    type: 0
-    icon: {fileID: 0}
-    power: 0

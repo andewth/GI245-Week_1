@@ -75,19 +75,30 @@ public class InventoryManager : MonoBehaviour
         }
 
         GameObject itemObj = Instantiate(ItemPrefabs[id], pos, Quaternion.identity);
-        itemObj.AddComponent<ItemPick>();
 
         ItemPick itemPick = itemObj.GetComponent<ItemPick>();
+        if (itemPick == null)
+        {
+            itemPick = itemObj.AddComponent<ItemPick>();
+        }
+
         itemPick.Init(item, instance, PartyManager.instance);
     }
 
 
+    public float dropRadius = 2.0f;
     public void SpawnDropInventory(Item[] items, Vector3 pos)
     {
         for (int i = 0; i < items.Length; i++)
         {
             if (items[i] != null)
-                SpawnDropItem(items[i], pos);
+            {
+                Vector2 randomOffset = Random.insideUnitCircle * dropRadius;
+                Vector3 spawnPos;
+
+                spawnPos = new Vector3(pos.x + randomOffset.x, pos.y, pos.z + randomOffset.y);
+                SpawnDropItem(items[i], spawnPos);
+            }
         }
     }
 }

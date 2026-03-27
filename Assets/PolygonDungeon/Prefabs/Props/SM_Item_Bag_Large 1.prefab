@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2499391744096683976}
   - component: {fileID: 381513790631293698}
   - component: {fileID: 8379623415407949431}
+  - component: {fileID: 4596346496599604505}
   m_Layer: 0
   m_Name: SM_Item_Bag_Large 1
   m_TagString: Untagged
@@ -28,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 2183001951008068311}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -105,7 +106,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemPick
   item:
     id: 0
-    itemName: 
+    itemName: Bag
     type: 0
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: a3923a23046ba5045a84983747ad1e14, type: 3}
     power: 0
+--- !u!64 &4596346496599604505
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2183001951008068311}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1775731935565371512, guid: f18ed0b3eceea0d4cbd303545a944848, type: 3}

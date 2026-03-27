@@ -10,6 +10,19 @@ public class ItemPick : MonoBehaviour
     private InventoryManager inventoryManager;
     private PartyManager partyManager;
 
+    private void Start()
+    {
+        if (partyManager == null)
+        {
+            partyManager = FindObjectOfType<PartyManager>();
+        }
+
+        if (inventoryManager == null)
+        {
+            inventoryManager = FindObjectOfType<InventoryManager>();
+        }
+    }
+
 
     public void Init(Item item, InventoryManager invManager, PartyManager ptyManager)
     {
@@ -21,16 +34,36 @@ public class ItemPick : MonoBehaviour
     private void PickUpItem(Character hero)
     {
         if (inventoryManager.AddItem(hero, item.ID))
+        {
             Destroy(gameObject);
+        }
     }
 
     private void OnMouseDown()
     {
         Debug.Log("Pick Up");
 
+        // Check if partyManager is null first
+        if (partyManager == null)
+        {
+            Debug.LogError("PartyManager is null on " + gameObject.name + ". Was Init() called?");
+            return; 
+        }
+
+        // Check if the SelectChars list is null
+        if (partyManager.SelectChars == null)
+        {
+            Debug.LogError("SelectChars list in PartyManager is null. Ensure it is initialized.");
+            return;
+        }
+
+        // If both are safe, proceed
         if (partyManager.SelectChars.Count > 0)
+        {
             PickUpItem(partyManager.SelectChars[0]);
+        }
     }
+
 }
 
 
