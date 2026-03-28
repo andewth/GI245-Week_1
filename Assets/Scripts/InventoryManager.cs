@@ -15,7 +15,7 @@ public class InventoryManager : MonoBehaviour
     { get { return itemData; } set { itemData = value; } }
 
 
-    public const int MAXSLOT = 16;
+    public const int MAXSLOT = 17;
 
     public static InventoryManager instance;
 
@@ -48,6 +48,13 @@ public class InventoryManager : MonoBehaviour
             return;
         
         PartyManager.instance.SelectChars[0].InventoryItems[index] = item;
+
+        switch(index)
+        {
+            case 16:
+                PartyManager.instance.SelectChars[0].EquipShield(item);
+                break;
+        }
     }
 
 
@@ -56,7 +63,15 @@ public class InventoryManager : MonoBehaviour
         if (PartyManager.instance.SelectChars.Count == 0)
             return;
 
+
         PartyManager.instance.SelectChars[0].InventoryItems[index] = null;
+
+        switch(index)
+        {
+            case 16:
+                PartyManager.instance.SelectChars[0].UnEquipShield(); 
+                break;
+        }
     }
 
 
@@ -99,6 +114,19 @@ public class InventoryManager : MonoBehaviour
                 spawnPos = new Vector3(pos.x + randomOffset.x, pos.y, pos.z + randomOffset.y);
                 SpawnDropItem(items[i], spawnPos);
             }
+        }
+    }
+
+
+    public void DrinkConsumableItem(Item item, int slotId)
+    {
+        string s = string.Format("Drink: {0}", item.ItemName);
+        Debug.Log(s);
+
+        if (PartyManager.instance.SelectChars.Count > 0)
+        {
+            PartyManager.instance.SelectChars[0].Recover(item.Power);
+            RemoveItemInBag(slotId);
         }
     }
 }

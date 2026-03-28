@@ -17,3 +17,4 @@ MonoBehaviour:
   type: 2
   icon: {fileID: 21300000, guid: 3cf756fdbf6a18b46938f77cd885a3c3, type: 3}
   power: 22
+  prefabID: 9

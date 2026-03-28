@@ -39,6 +39,9 @@ public abstract class Character : MonoBehaviour
     [SerializeField] protected int curHP = 10;
     public int CurHP { get { return curHP; } }
 
+    [SerializeField] protected int maxHp = 100;
+    public int MaxHP { get { return maxHp; } }
+
 
 
     [SerializeField] protected int attackDamage = 3;
@@ -97,6 +100,13 @@ public abstract class Character : MonoBehaviour
     protected UIManager uiManager;
 
     protected InventoryManager invManager;
+
+
+    [SerializeField] protected Transform shieldHand;
+
+    [SerializeField] protected GameObject shieldObj;
+
+    [SerializeField] protected int defensePower = 0;
 
 
 
@@ -283,17 +293,22 @@ public abstract class Character : MonoBehaviour
 
     public void ReceiveDamage(int damage)
     {
-        if (curHP <= 0 || state == CharState.Die)
+        if (CurHP <= 0 || state == CharState.Die)
             return;
 
-        curHP -= damage;
+        int damageAfter = damage - defensePower;
+
+        if (damageAfter < 0)
+            damageAfter = 0;
+
+        curHP -= damageAfter;
+
         if (curHP <= 0)
         {
             curHP = 0;
             Die();
         }
     }
-
 
     protected void AttackLogic()
     {
@@ -399,5 +414,40 @@ public abstract class Character : MonoBehaviour
     }
 
 
+    public void Recover(int n)
+    {
+        curHP += n;
+
+        if (curHP > MaxHP)
+        {
+            curHP = MaxHP;
+        }
+    }
+
+
+    public void EquipShield(Item item)
+    {
+        shieldObj = Instantiate(invManager.ItemPrefabs[item.PrefabID], shieldHand);
+
+        shieldObj.transform.localPosition = new Vector3(0.38f, 0.08f, 0.12f);
+        shieldObj.transform.Rotate(-90f, 0f, -180f, Space.Self);
+
+        defensePower += item.Power;
+        shield = item;
+
+        Debug.Log("Equip Shield!!");
+    }
+
+    public void UnEquipShield()
+    {
+        if (shield != null)
+        {
+            defensePower -= shield.Power;
+            shield = null;
+            Destroy(shieldObj);
+
+            Debug.Log("Exit Shield!!");
+        }
+    }
 
 }

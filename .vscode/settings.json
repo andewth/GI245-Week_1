@@ -67,5 +67,5 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "GI245-Week_1.slnx"
+    "dotnet.defaultSolution": "GI245-WorkshopVillage-3D.slnx"
 }
