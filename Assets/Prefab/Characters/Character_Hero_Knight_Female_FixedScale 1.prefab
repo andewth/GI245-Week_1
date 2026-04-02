@@ -3997,6 +3997,8 @@ MonoBehaviour:
     prefabID: 0
   shieldHand: {fileID: 4278834990416654}
   shieldObj: {fileID: 0}
+  weaponHand: {fileID: 4728550411551506}
+  weaponObj: {fileID: 0}
   defensePower: 0
 --- !u!114 &-3241035792256076594
 MonoBehaviour:
@@ -5203,6 +5205,10 @@ PrefabInstance:
     - target: {fileID: 164944, guid: a6aa6103ea34b484bb281f6d15faa6b9, type: 3}
       propertyPath: m_Name
       value: SM_Wep_Cutlass_01 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 164944, guid: a6aa6103ea34b484bb281f6d15faa6b9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 422222, guid: a6aa6103ea34b484bb281f6d15faa6b9, type: 3}
       propertyPath: m_LocalScale.x

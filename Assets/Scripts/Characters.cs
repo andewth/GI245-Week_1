@@ -106,6 +106,13 @@ public abstract class Character : MonoBehaviour
 
     [SerializeField] protected GameObject shieldObj;
 
+
+    [SerializeField] protected Transform weaponHand;
+
+    [SerializeField] protected GameObject weaponObj;
+
+
+
     [SerializeField] protected int defensePower = 0;
 
 
@@ -429,8 +436,8 @@ public abstract class Character : MonoBehaviour
     {
         shieldObj = Instantiate(invManager.ItemPrefabs[item.PrefabID], shieldHand);
 
-        shieldObj.transform.localPosition = new Vector3(0.38f, 0.08f, 0.12f);
-        shieldObj.transform.Rotate(-90f, 0f, -180f, Space.Self);
+        shieldObj.transform.localPosition = new Vector3(0.23f, -0.004f, -0.013f);
+        shieldObj.transform.Rotate(-90f, 0f, 180f, Space.Self);
 
         defensePower += item.Power;
         shield = item;
@@ -447,6 +454,31 @@ public abstract class Character : MonoBehaviour
             Destroy(shieldObj);
 
             Debug.Log("Exit Shield!!");
+        }
+    }
+
+    public void EquipWeapon(Item item)
+    {
+        weaponObj = Instantiate(invManager.ItemPrefabs[item.PrefabID], weaponHand);
+
+        weaponObj.transform.localPosition = new Vector3(0.13f, 0.052f, -0.013f);
+        weaponObj.transform.Rotate(-10.06f, 86.763f, -90f, Space.Self);
+
+        defensePower += item.Power;
+        mainWeapon = item;
+
+        Debug.Log("Equip Weapon!!");
+    }
+
+    public void UnEquipWeapon()
+    {
+        if (mainWeapon != null)
+        {
+            defensePower -= mainWeapon.Power;
+            mainWeapon = null;
+            Destroy(weaponObj);
+
+            Debug.Log("Exit Weapon!!");
         }
     }
 

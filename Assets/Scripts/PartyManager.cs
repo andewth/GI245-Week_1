@@ -55,6 +55,7 @@ public class PartyManager : MonoBehaviour
         InventoryManager.instance.AddItem(members[1], 0);   // Heal potion
         InventoryManager.instance.AddItem(members[1], 1);   // Sword
         InventoryManager.instance.AddItem(members[1], 2);   // Shield
+        InventoryManager.instance.AddItem(members[1], 3);   // Shield
 
 
         UIManager.instance.ShowMagicToggles();
