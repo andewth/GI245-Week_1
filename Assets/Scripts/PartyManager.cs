@@ -10,6 +10,10 @@ public class PartyManager : MonoBehaviour
     [SerializeField] private List<Character> selectChars = new List<Character>();
     public List<Character> SelectChars { get { return selectChars; } }
 
+    [SerializeField]
+    private List<Quest> questList = new List<Quest>();
+    public List<Quest> QuestList { get { return questList; } }
+
     public static PartyManager instance;
 
 
@@ -94,6 +98,8 @@ public class PartyManager : MonoBehaviour
         selectChars[0].IsMagicMode = true;
         selectChars[0].CurMagicCast = selectChars[0].MagicSkills[i];
     }
+
+    
 
 
 
