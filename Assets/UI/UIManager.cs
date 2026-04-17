@@ -314,8 +314,10 @@ public class UIManager : MonoBehaviour
         npcImage.sprite = npc.AvatarPic;
         npcNameText.text = npc.CharName;
 
-        Quest inProgressQuest = QuestManager.instance.CheckForQuest(npc, QuestStatus.InProgress);
+        ToggleDialogueBox(true);
 
+        Quest inProgressQuest = QuestManager.instance.CheckForQuest(npc, QuestStatus.InProgress);
+        
         if (inProgressQuest != null) //There is an In-Progress Quest going on
         {
             Debug.Log($"in-progress: {inProgressQuest}");
@@ -341,7 +343,12 @@ public class UIManager : MonoBehaviour
             //Debug.Log(newQuest);
 
             if (newQuest != null) //There is a new Quest
+            {
                 StartQuestDialogue(newQuest);
+            } else {
+                Debug.Log(">>>> No New Quest");
+                ToggleDialogueBox(false);
+            }
         }
     }
 
@@ -354,9 +361,10 @@ public class UIManager : MonoBehaviour
 
     public void PrepareDialogueBox(Npc npc)
     {
+        Debug.Log("Prepare Dialogue Box");
         ClearDialogueBox();
         SetupDialoguePanel(npc);
-        ToggleDialogueBox(true);
+        // ToggleDialogueBox(true);
     }
 
 
