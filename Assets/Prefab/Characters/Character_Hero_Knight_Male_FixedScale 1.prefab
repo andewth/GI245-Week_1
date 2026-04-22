@@ -2135,6 +2135,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Hero
   state: 0
+  avatarPic: {fileID: 21300000, guid: 483711f889ea8834ba993808b4e87740, type: 3}
+  charName: 
   ringSelection: {fileID: 7119339914288081122}
   curHP: 100
   maxHp: 100
@@ -2173,7 +2175,17 @@ MonoBehaviour:
     prefabID: 0
   shieldHand: {fileID: 4139452749197756}
   shieldObj: {fileID: 0}
+  weaponHand: {fileID: 0}
+  weaponObj: {fileID: 0}
   defensePower: 0
+  exp: 0
+  level: 0
+  strength: 0
+  dexterity: 0
+  constitution: 0
+  intelligence: 0
+  wisdom: 0
+  charisma: 0
 --- !u!114 &-6058823864054036322
 MonoBehaviour:
   m_ObjectHideFlags: 0

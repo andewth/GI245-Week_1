@@ -2752,7 +2752,7 @@ GameObject:
   - component: {fileID: 1749234957971277407}
   m_Layer: 6
   m_Name: Character_Goblin_Warrior_Male_FixedScale 1
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2882,14 +2882,49 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   state: 0
+  avatarPic: {fileID: 21300000, guid: beb58d80ece1125479ed57b077003fbf, type: 3}
+  charName: 
   ringSelection: {fileID: 7314918156093145415}
-  curHP: 10
-  attackDamage: 3
+  curHP: 100
+  maxHp: 100
+  attackDamage: 5
   attackRange: 2
   attackCooldown: 2
   attackTimer: 0
   findingRange: 20
   curCharTarget: {fileID: 0}
+  magicSkills: []
+  curMagicCast:
+    id: 0
+    name: 
+    icon: {fileID: 0}
+    range: 0
+    power: 0
+    loadTime: 0
+    shootTime: 0
+    loadId: 0
+    shootId: 0
+  isMagicMode: 0
+  inventoryItems: []
+  mainWeapon:
+    id: 0
+    itemName: 
+    type: 0
+    icon: {fileID: 0}
+    power: 0
+    prefabID: 0
+  shield:
+    id: 0
+    itemName: 
+    type: 0
+    icon: {fileID: 0}
+    power: 0
+    prefabID: 0
+  shieldHand: {fileID: 0}
+  shieldObj: {fileID: 0}
+  weaponHand: {fileID: 0}
+  weaponObj: {fileID: 0}
+  defensePower: 0
 --- !u!114 &1749234957971277407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2897,7 +2932,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1475337874035606}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f9997f002431f2748a9705d33d6272d5, type: 3}
   m_Name: 
@@ -5092,7 +5127,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 689876796715574038, guid: c03423643db76074c93061a0e1d125ed, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2867166371249400384, guid: c03423643db76074c93061a0e1d125ed, type: 3}
       propertyPath: m_LocalScale.x
@@ -5145,6 +5180,18 @@ PrefabInstance:
     - target: {fileID: 2867166371249400384, guid: c03423643db76074c93061a0e1d125ed, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3508981945991229934, guid: c03423643db76074c93061a0e1d125ed, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3508981945991229934, guid: c03423643db76074c93061a0e1d125ed, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.42168975
+      objectReference: {fileID: 0}
+    - target: {fileID: 3508981945991229934, guid: c03423643db76074c93061a0e1d125ed, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
