@@ -14,6 +14,13 @@ public class PartyManager : MonoBehaviour
     private List<Quest> questList = new List<Quest>();
     public List<Quest> QuestList { get { return questList; } }
 
+
+
+    [SerializeField]
+    private int partyMoney = 1000;
+    public int PartyMoney { get { return partyMoney; } set { partyMoney = value; } }
+
+
     public static PartyManager instance;
 
 
@@ -115,30 +122,31 @@ public class PartyManager : MonoBehaviour
 
     public void SelectSingleHeroByToggle(int i)
     {
-        if (!selectChars.Contains(members[i]))
+        //Debug.Log($"Select {i}");
+
+        if (selectChars.Contains(members[i]))
+        {
+            members[i].ToggleRingSelection(true);
+            UIManager.instance.ShowMagicToggles();
+        }
+        else
         {
             selectChars.Add(members[i]);
+            members[i].ToggleRingSelection(true);
+            UIManager.instance.ShowMagicToggles();
         }
-
-        members[i].ToggleRingSelection(true);
-        UIManager.instance.ShowMagicToggles();
     }
+    
 
     public void UnSelectSingleHeroByToggle(int i)
     {
-        if (i < 0 || i >= members.Count) return;
+        // เพิ่มบรรทัดนี้: เช็คว่า i ห้ามติดลบ และห้ามเกินจำนวนสมาชิกในปาร์ตี้
+        if (i < 0 || i >= members.Count) return; 
 
-        if (selectChars.Count <= 1)
+        if (selectChars.Contains(members[i]))
         {
-            UIManager.instance.ToggleAvatar[i].isOn = true;
-            return;
-        }
-
-        Character targetHero = members[i];
-        if (selectChars.Contains(targetHero))
-        {
-            selectChars.Remove(targetHero);
-            targetHero.ToggleRingSelection(false);
+            selectChars.Remove(members[i]);
+            members[i].ToggleRingSelection(false);
         }
     }
 

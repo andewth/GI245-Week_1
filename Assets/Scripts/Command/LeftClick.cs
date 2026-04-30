@@ -39,15 +39,15 @@ public class LeftClick : MonoBehaviour
             if (EventSystem.current.IsPointerOverGameObject())
                 return;
 
-            // ClearEverything();
+            ClearEverything();
         }
 
         // mouse hold down (เมื่อกดค้างเพื่อลาก)
         if (Input.GetMouseButton(0))
         {
             //if click UI, don't check
-            if (EventSystem.current.IsPointerOverGameObject())
-                return;
+            // if (EventSystem.current.IsPointerOverGameObject())
+            //     return;
 
             UpdateSelectionBox(Input.mousePosition);
         }
@@ -61,22 +61,26 @@ public class LeftClick : MonoBehaviour
     }
 
 
-    private void SelectCharacter(RaycastHit hit)
+    private int SelectCharacter(RaycastHit hit)
     {
         ClearEverything();
 
         Character hero = hit.collider.GetComponent<Character>();
-        Debug.Log("Selected Char: " + hit.collider.gameObject);
+        //Debug.Log("Selected Char: " + hit.collider.gameObject);
 
-        PartyManager.instance.SelectChars.Add(hero);
-        hero.ToggleRingSelection(true);
-        UIManager.instance.ShowMagicToggles();
+        int i = PartyManager.instance.FindIndexFromClass(hero);
+        //Debug.Log($"Click Release: {i}");
+        UIManager.instance.ToggleAvatar[i].isOn = true;
+        return i;
     }
 
-    void TrySelect(UnityEngine.Vector2 screenPos)
+    
+    private void TrySelect(UnityEngine.Vector2 screenPos)
     {
         Ray ray = cam.ScreenPointToRay(screenPos);
         RaycastHit hit;
+
+        int i = -1; // เปลี่ยนเป็น -1 เพื่อให้รู้ว่า "ยังไม่ได้เลือกฮีโร่ตัวไหนเลย"
 
         if (Physics.Raycast(ray, out hit, 1000, layerMask))
         {
@@ -84,8 +88,24 @@ public class LeftClick : MonoBehaviour
             {
                 case "Player":
                 case "Hero":
-                    SelectCharacter(hit);
+                    i = SelectCharacter(hit);
                     break;
+            }
+        }
+
+        // ถ้าไม่มีฮีโร่ตัวไหนถูกเลือกอยู่เลยในตอนนี้
+        if (PartyManager.instance.SelectChars.Count == 0)
+        {
+            // ถ้าคลิกโดนพื้น (i ยังเป็น -1) ให้ fallback ไปเลือกตัวที่ 0 เสมอ
+            if (i == -1) 
+            {
+                i = 0;
+            }
+
+            // ดักเช็คก่อนเซ็ตค่า ป้องกัน error กรณี ToggleAvatar มีไม่ถึง index นั้น
+            if (i >= 0 && i < UIManager.instance.ToggleAvatar.Length)
+            {
+                UIManager.instance.ToggleAvatar[i].isOn = true;
             }
         }
     }
@@ -102,7 +122,9 @@ public class LeftClick : MonoBehaviour
     private void ClearEverything()
     {
         foreach (Toggle t in UIManager.instance.ToggleAvatar)
+        {
             t.isOn = false;
+        }
 
         ClearRingSelection();
         PartyManager.instance.SelectChars.Clear();
@@ -148,8 +170,11 @@ public class LeftClick : MonoBehaviour
             if ((unitPos.x > corner1.x && unitPos.x < corner2.x)
                 && (unitPos.y > corner1.y && unitPos.y < corner2.y))
             {
-                PartyManager.instance.SelectChars.Add(member);
-                member.ToggleRingSelection(true);
+                int i = PartyManager.instance.FindIndexFromClass(member);
+                UIManager.instance.ToggleAvatar[i].isOn = true;
+
+                // PartyManager.instance.SelectChars.Add(member);
+                // member.ToggleRingSelection(true);
             }
         }
         boxSelection.sizeDelta = new UnityEngine.Vector2(0, 0); //clear Selection Box's size;
