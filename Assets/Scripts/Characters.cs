@@ -122,6 +122,8 @@ public abstract class Character : MonoBehaviour
 
     [SerializeField] protected GameObject weaponObj;
 
+    protected PartyManager partyManager;
+
 
 
     [SerializeField] protected int defensePower = 0;
@@ -136,11 +138,12 @@ public abstract class Character : MonoBehaviour
     }
 
 
-    public void CharInit(VFXManager vfxM, UIManager uiM, InventoryManager invM)
+    public void CharInit(VFXManager vfxM, UIManager uiM, InventoryManager invM, PartyManager partyM)
     {
         vfxManager = vfxM;
         uiManager = uiM;
         invManager = invM;
+        partyManager = partyM;
 
         inventoryItems = new Item[InventoryManager.MAXSLOT];
     }

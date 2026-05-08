@@ -2913,6 +2913,7 @@ MonoBehaviour:
     icon: {fileID: 0}
     power: 0
     prefabID: 0
+    normalPrice: 0
   shield:
     id: 0
     itemName: 
@@ -2920,11 +2921,13 @@ MonoBehaviour:
     icon: {fileID: 0}
     power: 0
     prefabID: 0
+    normalPrice: 0
   shieldHand: {fileID: 0}
   shieldObj: {fileID: 0}
   weaponHand: {fileID: 0}
   weaponObj: {fileID: 0}
   defensePower: 0
+  expDrop: 30
 --- !u!114 &1749234957971277407
 MonoBehaviour:
   m_ObjectHideFlags: 0

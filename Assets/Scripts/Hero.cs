@@ -43,6 +43,11 @@ public class Hero : Character
     { get { return charisma; } set { charisma = value; } }
 
 
+    [SerializeField] private int nextExp;
+    public int NextExp
+    { get { return nextExp; } set { nextExp = value; } }
+
+
 
 
 
@@ -75,8 +80,8 @@ public class Hero : Character
 
     protected void WalkToNPCUpdate()
     {
-        float distance = Vector3.Distance(transform.position, 
-                                        curCharTarget.transform.position);
+        float distance = Vector3.Distance(transform.position,
+            curCharTarget.transform.position);
 
         if (distance <= 2f)
         {
@@ -85,10 +90,18 @@ public class Hero : Character
 
             Npc npc = curCharTarget.GetComponent<Npc>();
 
-            if (npc.IsShopKeeper)
-                uiManager.PrepareShopPanel(npc, this);
+            if (npc != null)
+            {
+                if (npc.IsShopKeeper)
+                    uiManager.PrepareShopPanel(npc, this);
+                else
+                    uiManager.PrepareDialogueBox(npc);
+            }
             else
-                uiManager.PrepareDialogueBox(npc);
+            {
+                Hero hero = curCharTarget.GetComponent<Hero>();
+                uiManager.PrepareHeroJoinParty(hero);
+            }
         }
     }
 
@@ -105,6 +118,55 @@ public class Hero : Character
         }
     }
 
+
+    public void ReceiveExp(int n)
+    {
+        exp += n;
+        CheckLevel(exp);
+    }
+
     
+    private void UpdateStat()
+    {
+        attackDamage++;
+        defensePower++;
+        maxHp++;
+
+        //bonus
+        if (strength >= Random.Range(1, 20))
+            attackDamage++;
+
+        if (dexterity >= Random.Range(1, 20))
+            defensePower++;
+
+        if (constitution >= Random.Range(1, 20))
+            maxHp++;
+    }
+
+
+    private void CheckLevel(int exp)
+    {
+        nextExp = level * 30;
+
+        if (exp >= nextExp)
+        {
+            level++;
+            nextExp = level * 30;
+            UpdateStat();
+
+            switch (level)
+            {
+                case 5:
+                    magicSkills.Add(new Magic(VFXManager.Instance.MagicData[0]));
+                    uiManager.ShowMagicToggles();
+                    break;
+
+                case 10:
+                    magicSkills.Add(new Magic(VFXManager.Instance.MagicData[1]));
+                    uiManager.ShowMagicToggles();
+                    break;
+            }
+        }
+    }
 
 }

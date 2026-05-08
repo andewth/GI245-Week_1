@@ -20,7 +20,7 @@ public class EnemyManager : MonoBehaviour
     {
         foreach (Character m in monsters)
         {
-            m.CharInit(VFXManager.Instance, UIManager.instance, InventoryManager.instance);
+            m.CharInit(VFXManager.Instance, UIManager.instance, InventoryManager.instance, PartyManager.instance);
         }
 
         InventoryManager.instance.AddItem(monsters[0], 0); //Health Potion

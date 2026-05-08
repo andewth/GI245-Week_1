@@ -21,6 +21,9 @@ public class PartyManager : MonoBehaviour
     public int PartyMoney { get { return partyMoney; } set { partyMoney = value; } }
 
 
+    [SerializeField] private int totalExp;
+
+
     public static PartyManager instance;
 
 
@@ -34,7 +37,7 @@ public class PartyManager : MonoBehaviour
     {
         foreach (Character c in members)
         {
-            c.CharInit(VFXManager.Instance, UIManager.instance, InventoryManager.instance);
+            c.CharInit(VFXManager.Instance, UIManager.instance, InventoryManager.instance, this);
             // c.MagicSkills.Add(new Magic(0, "Fireball", 10f, 30, 3f, 1f, 0, 1));  // Skill 1
         }
 
@@ -49,6 +52,7 @@ public class PartyManager : MonoBehaviour
         // members[1].MagicSkills.Add(new Magic(2, "Firework", 10f, 20, 3f, 1f, 0, 6));  // Skill 4
 
 
+        /*
         members[0].MagicSkills.Add(new Magic(VFXManager.Instance.MagicData[0]));
         members[1].MagicSkills.Add(new Magic(VFXManager.Instance.MagicData[1]));
 
@@ -67,6 +71,7 @@ public class PartyManager : MonoBehaviour
         InventoryManager.instance.AddItem(members[1], 1);   // Sword
         InventoryManager.instance.AddItem(members[1], 2);   // Shield
         InventoryManager.instance.AddItem(members[1], 3);   // Shield
+        */
 
 
         UIManager.instance.ShowMagicToggles();
@@ -160,6 +165,30 @@ public class PartyManager : MonoBehaviour
 
         members.Remove(members[id]);
     }
+
+
+    public void DistributeTotalExp(int n)
+    {
+        totalExp = n;
+        int eachHeroExp = totalExp / members.Count;
+
+        foreach (Hero hero in members)
+            hero.ReceiveExp(eachHeroExp);
+    }
+
+
+    public bool HeroJoinParty(Character hero)
+    {
+        if (members.Count >= 6)
+            return false;
+
+        hero.CharInit(VFXManager.Instance, UIManager.instance, 
+            InventoryManager.instance, this);
+
+        members.Add(hero);
+        return true;
+    }
+    
 
 
 
