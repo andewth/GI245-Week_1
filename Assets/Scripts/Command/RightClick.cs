@@ -1,5 +1,6 @@
 using System.IO.Compression;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Vector3 = UnityEngine.Vector3;
 using UVector3 = UnityEngine.Vector3;
 using SVector3 = System.Numerics.Vector3;
@@ -28,9 +29,9 @@ public class RightClick : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonUp(1))
+        if (Mouse.current.rightButton.wasReleasedThisFrame)
         {
-            TryCommand(Input.mousePosition);
+            TryCommand(Mouse.current.position.value);
         }
     }
 

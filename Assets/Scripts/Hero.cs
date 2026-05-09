@@ -48,6 +48,11 @@ public class Hero : Character
     { get { return nextExp; } set { nextExp = value; } }
 
 
+    [SerializeField] private int prefabId;
+    public int PrefabID
+    { get { return prefabId; } }
+
+
 
 
 

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CameraBase : MonoBehaviour
 {
@@ -7,9 +8,15 @@ public class CameraBase : MonoBehaviour
     [SerializeField] private Transform corner1;
     [SerializeField] private Transform corner2;
 
+    InputAction moveAction;
+    Vector2 moveValue;
+
     [Header("Zoom")]
     [SerializeField] private Camera cam;
-    [SerializeField] private float zoomSpeed = 5f;
+    [SerializeField] private float zoomSpeed;
+
+    InputAction zoomAction;
+    Vector2 zoomValue;
 
     private float xInput;
     private float zInput;
@@ -27,6 +34,15 @@ public class CameraBase : MonoBehaviour
             cam = GetComponent<Camera>(); // กัน null
     }
 
+
+    void Start()
+    {
+        moveSpeed = 25f;
+        zoomSpeed = 0.05f;
+        moveAction = InputSystem.actions.FindAction("Move");
+        zoomAction = InputSystem.actions.FindAction("Zoom");
+    }
+
     void Update()
     {
         MoveByKB();
@@ -36,8 +52,12 @@ public class CameraBase : MonoBehaviour
 
     private void MoveByKB()
     {
-        xInput = Input.GetAxis("Horizontal");
-        zInput = Input.GetAxis("Vertical");
+        // xInput = Input.GetAxis("Horizontal");
+        // zInput = Input.GetAxis("Vertical");
+
+        moveValue = moveAction.ReadValue<Vector2>();
+        xInput = moveValue.x;
+        zInput = moveValue.y;
 
         Vector3 dir = (transform.forward * zInput) + (transform.right * xInput);
         transform.position += dir * moveSpeed * Time.deltaTime;
@@ -60,14 +80,16 @@ public class CameraBase : MonoBehaviour
     }
 
 
+
     private void Zoom()
     {
-        float zoomInput = Input.GetAxis("Mouse ScrollWheel");
+        zoomValue =  zoomAction.ReadValue<Vector2>();
+        float zoomInput = zoomValue.y * 5f;
 
-        if (Input.GetKey(KeyCode.Z))
-            zoomInput = -0.1f;
-        if (Input.GetKey(KeyCode.X))
-            zoomInput = 0.1f;
+        if (Keyboard.current.zKey.isPressed)
+            zoomInput = -1f;
+        if (Keyboard.current.xKey.isPressed)
+            zoomInput = 1f;
 
         cam.orthographicSize -= zoomInput * zoomSpeed;
         cam.orthographicSize = Mathf.Clamp(cam.orthographicSize, 4f, 10f);

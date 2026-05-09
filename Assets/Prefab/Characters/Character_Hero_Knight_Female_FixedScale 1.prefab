@@ -4013,6 +4013,7 @@ MonoBehaviour:
   wisdom: 8
   charisma: 12
   nextExp: 30
+  prefabId: 1
 --- !u!114 &-3241035792256076594
 MonoBehaviour:
   m_ObjectHideFlags: 0

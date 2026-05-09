@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 using TMPro;
 using System;
 using System.Collections.Generic; // List [Need]
@@ -210,7 +211,7 @@ public class UIManager : MonoBehaviour
 
 
     void Update() {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
             togglePauseUnpause.isOn = !togglePauseUnpause.isOn;
     }
 

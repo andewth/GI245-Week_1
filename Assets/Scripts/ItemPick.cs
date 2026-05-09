@@ -31,38 +31,35 @@ public class ItemPick : MonoBehaviour
         partyManager = ptyManager;
     }
 
-    private void PickUpItem(Character hero)
+    public void PickUpItem()
     {
-        if (inventoryManager.AddItem(hero, item.ID))
+        if (inventoryManager.AddItem(partyManager.SelectChars[0], item.ID))
         {
             Destroy(gameObject);
         }
     }
 
-    private void OnMouseDown()
-    {
-        Debug.Log("Pick Up");
+    // private void OnMouseDown()
+    // {
+    //     Debug.Log("Pick Up");
 
-        // Check if partyManager is null first
-        if (partyManager == null)
-        {
-            Debug.LogError("PartyManager is null on " + gameObject.name + ". Was Init() called?");
-            return; 
-        }
+    //     if (partyManager == null)
+    //     {
+    //         Debug.LogError("PartyManager is null on " + gameObject.name + ". Was Init() called?");
+    //         return; 
+    //     }
 
-        // Check if the SelectChars list is null
-        if (partyManager.SelectChars == null)
-        {
-            Debug.LogError("SelectChars list in PartyManager is null. Ensure it is initialized.");
-            return;
-        }
+    //     if (partyManager.SelectChars == null)
+    //     {
+    //         Debug.LogError("SelectChars list in PartyManager is null. Ensure it is initialized.");
+    //         return;
+    //     }
 
-        // If both are safe, proceed
-        if (partyManager.SelectChars.Count > 0)
-        {
-            PickUpItem(partyManager.SelectChars[0]);
-        }
-    }
+    //     if (partyManager.SelectChars.Count > 0)
+    //     {
+    //         PickUpItem(partyManager.SelectChars[0]);
+    //     }
+    // }
 
 }
 
