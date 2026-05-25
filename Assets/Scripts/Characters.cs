@@ -145,7 +145,8 @@ public abstract class Character : MonoBehaviour
         invManager = invM;
         partyManager = partyM;
 
-        inventoryItems = new Item[InventoryManager.MAXSLOT];
+        if (inventoryItems == null || inventoryItems.Length == 0)
+            inventoryItems = new Item[InventoryManager.MAXSLOT];
     }
 
 
@@ -156,6 +157,9 @@ public abstract class Character : MonoBehaviour
             return;
 
         state = newState;
+
+        if (navAgent == null)
+            return;
 
         if (state == CharState.Idle)
         {
@@ -183,6 +187,9 @@ public abstract class Character : MonoBehaviour
 
     protected void WalkUpdate()
     {
+        if (navAgent == null)
+            return;
+
         float distance = UnityEngine.Vector3.Distance(transform.position, navAgent.destination);
         if (distance <= navAgent.stoppingDistance)
         {
@@ -202,13 +209,16 @@ public abstract class Character : MonoBehaviour
 
     public void ToAttackCharacter(Character target)
     {
-        if (curHP <= 0 || state == CharState.Die)
+        if (curHP <= 0 || state == CharState.Die || target == null)
             return;
 
         curCharTarget = target;
 
-        navAgent.SetDestination(target.transform.position);
-        navAgent.isStopped = false;
+        if (navAgent != null)
+        {
+            navAgent.SetDestination(target.transform.position);
+            navAgent.isStopped = false;
+        }
 
         if (isMagicMode)
         {
@@ -227,7 +237,8 @@ public abstract class Character : MonoBehaviour
             return;
         }
 
-        navAgent.SetDestination(curCharTarget.transform.position);
+        if (navAgent != null)
+            navAgent.SetDestination(curCharTarget.transform.position);
 
         float distance = Vector3.Distance(transform.position, 
                                         curCharTarget.transform.position);
@@ -242,9 +253,13 @@ public abstract class Character : MonoBehaviour
 
     protected void Attack()
     {
+        if (curCharTarget == null)
+            return;
+
         transform.LookAt(curCharTarget.transform);
         
-        anim.SetTrigger("Attack");
+        if (anim != null)
+            anim.SetTrigger("Attack");
 
         AttackLogic();
     }
@@ -260,7 +275,8 @@ public abstract class Character : MonoBehaviour
             SetState(CharState.Idle);
             return;
         }
-        navAgent.isStopped = true;
+        if (navAgent != null)
+            navAgent.isStopped = true;
 
         attackTimer += Time.deltaTime;
         if (attackTimer >= attackCooldown)
@@ -275,8 +291,11 @@ public abstract class Character : MonoBehaviour
         if (distance > attackRange)
         {
             SetState(CharState.WalkToEnemy);
-            navAgent.SetDestination(curCharTarget.transform.position);
-            navAgent.isStopped = false;
+            if (navAgent != null)
+            {
+                navAgent.SetDestination(curCharTarget.transform.position);
+                navAgent.isStopped = false;
+            }
         }
     }
 
@@ -290,12 +309,20 @@ public abstract class Character : MonoBehaviour
 
     protected virtual void Die()
     {
-        navAgent.isStopped = true;
+        if (navAgent != null)
+            navAgent.isStopped = true;
+
         SetState(CharState.Die);
 
-        anim.SetTrigger("Die");
+        if (anim != null)
+            anim.SetTrigger("Die");
 
-        invManager.SpawnDropInventory(inventoryItems, transform.position);
+        if (inventoryItems != null)
+        {
+            InventoryManager manager = invManager ?? InventoryManager.instance;
+            if (manager != null)
+                manager.SpawnDropInventory(inventoryItems, transform.position);
+        }
 
         StartCoroutine(DestroyObject());
     }
@@ -334,6 +361,9 @@ public abstract class Character : MonoBehaviour
 
     protected void AttackLogic()
     {
+        if (curCharTarget == null)
+            return;
+
         Character target = curCharTarget.GetComponent<Character>();
         
         if (target != null)
@@ -359,6 +389,9 @@ public abstract class Character : MonoBehaviour
 
     protected void MagicCastLogic(Magic magic)
     {
+        if (curCharTarget == null)
+            return;
+
         Character target = curCharTarget.GetComponent<Character>();
 
         if (target != null)
@@ -368,7 +401,7 @@ public abstract class Character : MonoBehaviour
 
     private IEnumerator ShootMagicCast(Magic curMagicCast)
     {
-        if (vfxManager != null)
+        if (vfxManager != null && curCharTarget != null)
         {
             Vector3 chestPosition = curCharTarget.transform.position + new Vector3(0, 1.2f, 0);
 
@@ -378,10 +411,12 @@ public abstract class Character : MonoBehaviour
                                     curMagicCast.ShootTime);
         }
 
-        yield return new WaitForSeconds(curMagicCast.ShootTime);
+        if (curMagicCast != null)
+            yield return new WaitForSeconds(curMagicCast.ShootTime);
 
         //cast logic
-        MagicCastLogic(curMagicCast);
+        if (curMagicCast != null)
+            MagicCastLogic(curMagicCast);
         isMagicMode = false;
 
         SetState(CharState.Idle);
@@ -393,6 +428,9 @@ public abstract class Character : MonoBehaviour
 
     private IEnumerator LoadMagicCast(Magic curMagicCast)
     {
+        if (curMagicCast == null)
+            yield break;
+
         if (vfxManager != null)
             vfxManager.LoadMagic(curMagicCast.LoadID,
                                 transform.position,
@@ -406,8 +444,11 @@ public abstract class Character : MonoBehaviour
 
     private void MagicCast(Magic curMagicCast)
     {
-        transform.LookAt(curCharTarget.transform);
-        anim.SetTrigger("MagicAttack");
+        if (curCharTarget != null)
+            transform.LookAt(curCharTarget.transform);
+
+        if (anim != null)
+            anim.SetTrigger("MagicAttack");
 
         StartCoroutine(LoadMagicCast(curMagicCast));
     }
@@ -421,14 +462,16 @@ public abstract class Character : MonoBehaviour
             return;
         }
 
-        navAgent.SetDestination(curCharTarget.transform.position);
+        if (navAgent != null)
+            navAgent.SetDestination(curCharTarget.transform.position);
 
         float distance = Vector3.Distance(transform.position,
                                         curCharTarget.transform.position);
 
         if (distance <= curMagicCast.Range)
         {
-            navAgent.isStopped = true;
+            if (navAgent != null)
+                navAgent.isStopped = true;
             SetState(CharState.MagicCast);
 
             MagicCast(curMagicCast);
@@ -449,10 +492,19 @@ public abstract class Character : MonoBehaviour
 
     public void EquipShield(Item item)
     {
+        if (invManager == null || item == null || shieldHand == null)
+            return;
+
+        if (item.PrefabID < 0 || item.PrefabID >= invManager.ItemPrefabs.Length)
+            return;
+
         shieldObj = Instantiate(invManager.ItemPrefabs[item.PrefabID], shieldHand);
 
-        shieldObj.transform.localPosition = new Vector3(0.23f, -0.004f, -0.013f);
-        shieldObj.transform.Rotate(-90f, 0f, 180f, Space.Self);
+        if (shieldObj != null)
+        {
+            shieldObj.transform.localPosition = new Vector3(0.23f, -0.004f, -0.013f);
+            shieldObj.transform.Rotate(-90f, 0f, 180f, Space.Self);
+        }
 
         defensePower += item.Power;
         shield = item;
@@ -474,10 +526,19 @@ public abstract class Character : MonoBehaviour
 
     public void EquipWeapon(Item item)
     {
+        if (invManager == null || item == null || weaponHand == null)
+            return;
+
+        if (item.PrefabID < 0 || item.PrefabID >= invManager.ItemPrefabs.Length)
+            return;
+
         weaponObj = Instantiate(invManager.ItemPrefabs[item.PrefabID], weaponHand);
 
-        weaponObj.transform.localPosition = new Vector3(0.13f, 0.052f, -0.013f);
-        weaponObj.transform.Rotate(-10.06f, 86.763f, -90f, Space.Self);
+        if (weaponObj != null)
+        {
+            weaponObj.transform.localPosition = new Vector3(0.13f, 0.052f, -0.013f);
+            weaponObj.transform.Rotate(-10.06f, 86.763f, -90f, Space.Self);
+        }
 
         defensePower += item.Power;
         mainWeapon = item;
@@ -501,15 +562,18 @@ public abstract class Character : MonoBehaviour
     // move to NPC
     public void ToTalkToNPC(Character npc)
     {
-        if (curHP <= 0 || state == CharState.Die)
+        if (curHP <= 0 || state == CharState.Die || npc == null)
             return;
 
         //lock target
         curCharTarget = npc;
 
         //start walking to enemy
-        navAgent.SetDestination(npc.transform.position);
-        navAgent.isStopped = false;
+        if (navAgent != null)
+        {
+            navAgent.SetDestination(npc.transform.position);
+            navAgent.isStopped = false;
+        }
 
         SetState(CharState.WalkToNPC);
     }

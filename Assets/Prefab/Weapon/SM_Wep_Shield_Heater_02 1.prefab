@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 3367978}
   - component: {fileID: 2319392}
   - component: {fileID: 64330640073874316}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SM_Wep_Shield_Heater_02 1
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -3964,7 +3964,7 @@ MonoBehaviour:
   ringSelection: {fileID: 7279378025457530227}
   curHP: 100
   maxHp: 100
-  attackDamage: 3
+  attackDamage: 50
   attackRange: 2
   attackCooldown: 2
   attackTimer: 0

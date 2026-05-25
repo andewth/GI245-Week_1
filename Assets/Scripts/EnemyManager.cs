@@ -18,6 +18,14 @@ public class EnemyManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        Debug.Log("EnemyManager Start: monsters count = " + (monsters != null ? monsters.Count : -1));
+
+        if (monsters == null)
+        {
+            Debug.LogError("EnemyManager: monsters list is null!");
+            return;
+        }
+
         foreach (Character m in monsters)
         {
             if (m == null) 
@@ -26,15 +34,23 @@ public class EnemyManager : MonoBehaviour
                 continue; 
             }
 
+            Debug.Log("CharInit for: " + m.name);
             m.CharInit(VFXManager.Instance, UIManager.instance, InventoryManager.instance, PartyManager.instance);
         }
 
 
-        if (monsters.Count > 0 && monsters[0] != null)
+        foreach (Enemy m in monsters)
         {
-            InventoryManager.instance.AddItem(monsters[0], 0); //Health Potion
-            InventoryManager.instance.AddItem(monsters[0], 1); //Sword
-            InventoryManager.instance.AddItem(monsters[0], 2); //Shield
+            if (m == null)
+                continue;
+
+            Debug.Log("Adding items to: " + m.name);
+
+            bool added0 = InventoryManager.instance.AddItem(m, 0); //Health Potion
+            bool added1 = InventoryManager.instance.AddItem(m, 1); //Sword
+            bool added2 = InventoryManager.instance.AddItem(m, 2); //Shield
+
+            Debug.Log($"Items added to {m.name}: potion={added0}, sword={added1}, shield={added2}");
         }
     }
 }

@@ -48,8 +48,16 @@ public class GameManager : MonoBehaviour
 
         hero.CharInit(VFXManager.Instance, UIManager.instance, InventoryManager.instance, PartyManager.instance);
         
-        InventoryManager.instance.AddItem(hero, 0);
-        InventoryManager.instance.AddItem(hero, 2);
+        if (InventoryManager.instance != null && InventoryManager.instance.ItemData != null && InventoryManager.instance.ItemData.Length > 0)
+        {
+            bool added0 = InventoryManager.instance.AddItem(hero, 0);
+            bool added2 = InventoryManager.instance.AddItem(hero, 2);
+            Debug.Log("Player item 0 added: " + added0 + ", item 2 added: " + added2);
+        }
+        else
+        {
+            Debug.LogError("InventoryManager or ItemData is not set up! Cannot add starting items.");
+        }
 
         UIManager.instance.MapToggleAvatar();
         PartyManager.instance.SelectSingleHero(0);

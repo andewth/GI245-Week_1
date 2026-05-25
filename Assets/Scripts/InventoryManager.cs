@@ -30,8 +30,21 @@ public class InventoryManager : MonoBehaviour
 
     public bool AddItem(Character character, int id)
     {
-        if (character == null || id < 0 || id >= itemData.Length)
+        if (character == null)
+        {
+            Debug.LogWarning("AddItem failed: character is null");
             return false;
+        }
+        if (id < 0 || id >= itemData.Length)
+        {
+            Debug.LogWarning($"AddItem failed: id {id} out of range (itemData length = {itemData.Length})");
+            return false;
+        }
+        if (itemData[id] == null)
+        {
+            Debug.LogWarning($"AddItem failed: itemData[{id}] is null. Please assign ItemData in InventoryManager Inspector.");
+            return false;
+        }
 
         Item item = new Item(itemData[id]);
 
@@ -99,22 +112,25 @@ public class InventoryManager : MonoBehaviour
         if (item == null || ItemPrefabs == null || ItemPrefabs.Length == 0)
             return;
 
-        int id;
+        int prefabId = item.PrefabID;
 
-        switch (item.Type)
+        if (prefabId < 0 || prefabId >= ItemPrefabs.Length)
         {
-            case ItemType.Consumable:
-                id = 1;
-                break;
-            default:
-                id = 0;
-                break;
+            switch (item.Type)
+            {
+                case ItemType.Consumable:
+                    prefabId = 1;
+                    break;
+                default:
+                    prefabId = 0;
+                    break;
+            }
+
+            if (prefabId < 0 || prefabId >= ItemPrefabs.Length)
+                prefabId = 0;
         }
 
-        if (id < 0 || id >= ItemPrefabs.Length)
-            id = 0;
-
-        GameObject itemObj = Instantiate(ItemPrefabs[id], pos, Quaternion.identity);
+        GameObject itemObj = Instantiate(ItemPrefabs[prefabId], pos, Quaternion.identity);
 
         ItemPick itemPick = itemObj.GetComponent<ItemPick>();
         if (itemPick == null)

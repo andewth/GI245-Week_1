@@ -48,6 +48,9 @@ public class Item
 
     public Item(ItemData data)
     {
+        if (data == null)
+            return;
+
         id = data.id;
         itemName = data.itemName;
         type = data.type;

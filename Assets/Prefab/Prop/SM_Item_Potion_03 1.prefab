@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2183001951008068311
+--- !u!1 &157152
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,48 +8,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1513284352239356013}
-  - component: {fileID: 2499391744096683976}
-  - component: {fileID: 381513790631293698}
-  - component: {fileID: 8379623415407949431}
-  - component: {fileID: 4596346496599604505}
+  - component: {fileID: 453130}
+  - component: {fileID: 3320336}
+  - component: {fileID: 2391754}
+  - component: {fileID: -4205381738924547353}
+  - component: {fileID: 64173581108920664}
   m_Layer: 0
-  m_Name: SM_Item_Bag_Large 1
+  m_Name: SM_Item_Potion_03 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1513284352239356013
+--- !u!4 &453130
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2183001951008068311}
+  m_GameObject: {fileID: 157152}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &2499391744096683976
+--- !u!33 &3320336
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2183001951008068311}
-  m_Mesh: {fileID: -1775731935565371512, guid: f18ed0b3eceea0d4cbd303545a944848, type: 3}
---- !u!23 &381513790631293698
+  m_GameObject: {fileID: 157152}
+  m_Mesh: {fileID: 4300000, guid: d28653595ef9e684f93988d18c390736, type: 3}
+--- !u!23 &2391754
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2183001951008068311}
+  m_GameObject: {fileID: 157152}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -68,7 +68,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -1268758282064500386, guid: f18ed0b3eceea0d4cbd303545a944848, type: 3}
+  - {fileID: 2100000, guid: 42b64fdb315e3054ea757d8d1c4bcfa7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -80,7 +80,7 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -92,31 +92,33 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &8379623415407949431
+--- !u!114 &-4205381738924547353
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2183001951008068311}
+  m_GameObject: {fileID: 157152}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f91a0f6d468c1fe41a36ac7dbde8d18a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemPick
   item:
-    id: 0
-    itemName: Bag
+    id: 1
+    itemName: Potion
     type: 0
-    icon: {fileID: 21300000, guid: a3923a23046ba5045a84983747ad1e14, type: 3}
+    icon: {fileID: 21300000, guid: 71597b0e2385e5c4097f3b21fd250cbb, type: 3}
     power: 0
---- !u!64 &4596346496599604505
+    prefabID: 0
+    normalPrice: 0
+--- !u!64 &64173581108920664
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2183001951008068311}
+  m_GameObject: {fileID: 157152}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -131,4 +133,4 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 1
   m_CookingOptions: 30
-  m_Mesh: {fileID: -1775731935565371512, guid: f18ed0b3eceea0d4cbd303545a944848, type: 3}
+  m_Mesh: {fileID: 43835747619174404, guid: 3283ced519e050643acb46aa655023ae, type: 2}

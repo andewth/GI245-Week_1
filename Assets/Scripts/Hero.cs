@@ -56,6 +56,14 @@ public class Hero : Character
 
 
 
+    void Start()
+    {
+        if (invManager == null)
+        {
+            CharInit(VFXManager.Instance, UIManager.instance, InventoryManager.instance, PartyManager.instance);
+        }
+    }
+
     private void Update() 
     {
         switch (state)
@@ -85,27 +93,37 @@ public class Hero : Character
 
     protected void WalkToNPCUpdate()
     {
+        if (curCharTarget == null)
+        {
+            SetState(CharState.Idle);
+            return;
+        }
+
         float distance = Vector3.Distance(transform.position,
             curCharTarget.transform.position);
 
         if (distance <= 2f)
         {
-            navAgent.isStopped = true;
+            if (navAgent != null)
+                navAgent.isStopped = true;
             SetState(CharState.Idle);
 
             Npc npc = curCharTarget.GetComponent<Npc>();
 
-            if (npc != null)
+            if (uiManager != null)
             {
-                if (npc.IsShopKeeper)
-                    uiManager.PrepareShopPanel(npc, this);
+                if (npc != null)
+                {
+                    if (npc.IsShopKeeper)
+                        uiManager.PrepareShopPanel(npc, this);
+                    else
+                        uiManager.PrepareDialogueBox(npc);
+                }
                 else
-                    uiManager.PrepareDialogueBox(npc);
-            }
-            else
-            {
-                Hero hero = curCharTarget.GetComponent<Hero>();
-                uiManager.PrepareHeroJoinParty(hero);
+                {
+                    Hero hero = curCharTarget.GetComponent<Hero>();
+                    uiManager.PrepareHeroJoinParty(hero);
+                }
             }
         }
     }
@@ -159,17 +177,24 @@ public class Hero : Character
             nextExp = level * 30;
             UpdateStat();
 
-            switch (level)
+            if (VFXManager.Instance != null && VFXManager.Instance.MagicData != null)
             {
-                case 5:
-                    magicSkills.Add(new Magic(VFXManager.Instance.MagicData[0]));
-                    uiManager.ShowMagicToggles();
-                    break;
+                switch (level)
+                {
+                    case 5:
+                        if (VFXManager.Instance.MagicData.Length > 0)
+                            magicSkills.Add(new Magic(VFXManager.Instance.MagicData[0]));
+                        if (uiManager != null)
+                            uiManager.ShowMagicToggles();
+                        break;
 
-                case 10:
-                    magicSkills.Add(new Magic(VFXManager.Instance.MagicData[1]));
-                    uiManager.ShowMagicToggles();
-                    break;
+                    case 10:
+                        if (VFXManager.Instance.MagicData.Length > 1)
+                            magicSkills.Add(new Magic(VFXManager.Instance.MagicData[1]));
+                        if (uiManager != null)
+                            uiManager.ShowMagicToggles();
+                        break;
+                }
             }
         }
     }
