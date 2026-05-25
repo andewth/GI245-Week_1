@@ -527,6 +527,9 @@ public class UIManager : MonoBehaviour
         foreach (Toggle t in toggleAvatar)
             t.gameObject.SetActive(false);
 
+        if (PartyManager.instance.Members.Count == 0)
+            return;
+
         for (int i = 0; i < PartyManager.instance.Members.Count; i++)
         {
             toggleAvatar[i].gameObject.SetActive(true);

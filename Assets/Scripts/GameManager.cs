@@ -39,12 +39,17 @@ public class GameManager : MonoBehaviour
         heroObj.tag = "Player";
 
         Character hero = heroObj.GetComponent<Character>();
+        Hero playerHero = heroObj.GetComponent<Hero>();
+        playerHero.PrefabID = i;
         PartyManager.instance.Members.Add(hero);
 
         hero.CharInit(VFXManager.Instance, UIManager.instance, InventoryManager.instance, PartyManager.instance);
         
         InventoryManager.instance.AddItem(hero, 0);
         InventoryManager.instance.AddItem(hero, 2);
+
+        UIManager.instance.MapToggleAvatar();
+        PartyManager.instance.SelectSingleHero(0);
 
     }
 

@@ -50,7 +50,7 @@ public class Hero : Character
 
     [SerializeField] private int prefabId;
     public int PrefabID
-    { get { return prefabId; } }
+    { get { return prefabId; } set { prefabId = value; } }
 
 
 

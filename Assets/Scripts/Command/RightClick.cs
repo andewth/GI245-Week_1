@@ -66,7 +66,11 @@ public class RightClick : MonoBehaviour
                 
                 case "NPC":
                 case "Hero":
-                    CommandTalkToNPC(hit, PartyManager.instance.SelectChars);
+                    CommandToCharacter(hit, PartyManager.instance.SelectChars);
+                    break;
+
+                case "Player":
+                    SelectCharacter(hit);
                     break;
             }
         }
@@ -103,6 +107,36 @@ public class RightClick : MonoBehaviour
             return;
 
         heroes[0].ToTalkToNPC(npc);
+    }
+
+    private void CommandToCharacter(RaycastHit hit, List<Character> heroes)
+    {
+        Character character = hit.collider.GetComponent<Character>();
+
+        if (PartyManager.instance.IsPartyMember(character))
+        {
+            int i = PartyManager.instance.FindIndexFromClass(character);
+
+            if (i != -1)
+                UIManager.instance.ToggleAvatar[i].isOn = true;
+
+            PartyManager.instance.SelectHero(character);
+            return;
+        }
+
+        CommandTalkToNPC(hit, heroes);
+    }
+
+    private void SelectCharacter(RaycastHit hit)
+    {
+        Character character = hit.collider.GetComponent<Character>();
+        int i = PartyManager.instance.FindIndexFromClass(character);
+
+        if (i == -1)
+            return;
+
+        UIManager.instance.ToggleAvatar[i].isOn = true;
+        PartyManager.instance.SelectHero(character);
     }
     
 

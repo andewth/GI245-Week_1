@@ -56,8 +56,10 @@ public class LeftClick : MonoBehaviour
         // mouse up (เมื่อปล่อยเมาส์)
         if (Mouse.current.leftButton.wasReleasedThisFrame)
         {
-            ReleaseSelectionBox(Mouse.current.position.value);
-            TrySelect(Mouse.current.position.value);
+            bool selectedByBox = ReleaseSelectionBox(Mouse.current.position.value);
+
+            if (!selectedByBox)
+                TrySelect(Mouse.current.position.value);
         }
     }
 
@@ -71,7 +73,11 @@ public class LeftClick : MonoBehaviour
 
         int i = PartyManager.instance.FindIndexFromClass(hero);
         //Debug.Log($"Click Release: {i}");
+        if (i == -1)
+            return i;
+
         UIManager.instance.ToggleAvatar[i].isOn = true;
+        PartyManager.instance.SelectSingleHero(i);
         return i;
     }
 
@@ -156,7 +162,7 @@ public class LeftClick : MonoBehaviour
     }
 
 
-    private void ReleaseSelectionBox(UnityEngine.Vector2 mousePos)
+    private bool ReleaseSelectionBox(UnityEngine.Vector2 mousePos)
     {
         //Debug.Log("Step 2 - " + Release Mouse);
         UnityEngine.Vector2 corner1; //down-left corner
@@ -184,13 +190,18 @@ public class LeftClick : MonoBehaviour
                 }
 
                 int i = PartyManager.instance.FindIndexFromClass(member);
+                if (i == -1)
+                    continue;
+
                 UIManager.instance.ToggleAvatar[i].isOn = true;
+                PartyManager.instance.SelectSingleHeroByToggle(i);
 
                 // PartyManager.instance.SelectChars.Add(member);
                 // member.ToggleRingSelection(true);
             }
         }
         boxSelection.sizeDelta = new UnityEngine.Vector2(0, 0); //clear Selection Box's size;
+        return anyNewCharSelect;
     }
 
 

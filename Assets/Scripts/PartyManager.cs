@@ -45,7 +45,8 @@ public class PartyManager : MonoBehaviour
         //     c.CharInit(VFXManager.Instance, UIManager.instance, InventoryManager.instance, this);
         // }
 
-        SelectSingleHero(0);
+        if (members.Count > 0)
+            SelectSingleHero(0);
 
         // members[0].MagicSkills.Add(new Magic(0, "Power Glow", 10f, 20, 3f, 1f, 2, 2));  // Skill 2
         // members[0].MagicSkills.Add(new Magic(1, "Fire Explosion", 10f, 20, 3f, 1f, 1, 3));   // Skill 3
@@ -97,6 +98,9 @@ public class PartyManager : MonoBehaviour
 
     public void SelectSingleHero(int i)
     {
+        if (i < 0 || i >= members.Count)
+            return;
+
         foreach (Character c in selectChars)
             c.ToggleRingSelection(false);
 
@@ -104,6 +108,21 @@ public class PartyManager : MonoBehaviour
 
         selectChars.Add(members[i]);
         selectChars[0].ToggleRingSelection(true);
+    }
+
+    public void SelectHero(Character hero)
+    {
+        int i = FindIndexFromClass(hero);
+
+        if (i == -1)
+            return;
+
+        SelectSingleHero(i);
+    }
+
+    public bool IsPartyMember(Character hero)
+    {
+        return members.Contains(hero);
     }
 
 
@@ -126,12 +145,15 @@ public class PartyManager : MonoBehaviour
                 return i;
             }
         }
-        return 0; 
+        return -1; 
     }
     
 
     public void SelectSingleHeroByToggle(int i)
     {
+        if (i < 0 || i >= members.Count)
+            return;
+
         //Debug.Log($"Select {i}");
 
         if (selectChars.Contains(members[i]))
@@ -237,8 +259,11 @@ public class PartyManager : MonoBehaviour
 
             if (i == 0)
                 heroObj.gameObject.tag = "Player";
+            else
+                heroObj.gameObject.tag = "Hero";
 
             Hero hero = heroObj.GetComponent<Hero>();
+            hero.PrefabID = heroData[i].prefabId;
             hero.CharInit(VFXManager.Instance, UIManager.instance,
                 InventoryManager.instance, this);
             hero.CurHP = heroData[i].curHp;
@@ -264,6 +289,9 @@ public class PartyManager : MonoBehaviour
             hero.NextExp = heroData[i].nextExp;
             members.Add(hero);
         }
+
+        UIManager.instance.MapToggleAvatar();
+        SelectSingleHero(0);
     }
     
 
