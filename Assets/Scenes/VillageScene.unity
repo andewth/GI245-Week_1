@@ -25977,6 +25977,42 @@ PrefabInstance:
       propertyPath: 'monsters.Array.data[3]'
       value: 
       objectReference: {fileID: 3030599571256592818, guid: a093d3eab309cfc42a9a4274b966e793, type: 3}
+    - target: {fileID: 3554787342938401500, guid: e1115885a263d8b4db984d1006a476b8, type: 3}
+      propertyPath: itemPrefabs.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3554787342938401500, guid: e1115885a263d8b4db984d1006a476b8, type: 3}
+      propertyPath: 'itemPrefabs.Array.data[0]'
+      value: 
+      objectReference: {fileID: 157152, guid: 432f5f8439a91ea4582c39bb83ad59e3, type: 3}
+    - target: {fileID: 3554787342938401500, guid: e1115885a263d8b4db984d1006a476b8, type: 3}
+      propertyPath: 'itemPrefabs.Array.data[1]'
+      value: 
+      objectReference: {fileID: 138470, guid: 630627b9fd11d4340a42d44621ddcfa7, type: 3}
+    - target: {fileID: 3554787342938401500, guid: e1115885a263d8b4db984d1006a476b8, type: 3}
+      propertyPath: 'itemPrefabs.Array.data[2]'
+      value: 
+      objectReference: {fileID: 149276, guid: a33323d27d42f614eb7a06a077b97944, type: 3}
+    - target: {fileID: 3554787342938401500, guid: e1115885a263d8b4db984d1006a476b8, type: 3}
+      propertyPath: 'itemPrefabs.Array.data[3]'
+      value: 
+      objectReference: {fileID: 2183001951008068311, guid: e88b71b608200ce418f40f3bd34245be, type: 3}
+    - target: {fileID: 3554787342938401500, guid: e1115885a263d8b4db984d1006a476b8, type: 3}
+      propertyPath: 'itemPrefabs.Array.data[4]'
+      value: 
+      objectReference: {fileID: 134266, guid: 41a1a08a4be8e73439675af400e7ae66, type: 3}
+    - target: {fileID: 3554787342938401500, guid: e1115885a263d8b4db984d1006a476b8, type: 3}
+      propertyPath: 'itemPrefabs.Array.data[5]'
+      value: 
+      objectReference: {fileID: 114634, guid: e4e5ed7e96964164382f008e86da89f7, type: 3}
+    - target: {fileID: 3554787342938401500, guid: e1115885a263d8b4db984d1006a476b8, type: 3}
+      propertyPath: 'itemPrefabs.Array.data[6]'
+      value: 
+      objectReference: {fileID: 138470, guid: 630627b9fd11d4340a42d44621ddcfa7, type: 3}
+    - target: {fileID: 3554787342938401500, guid: e1115885a263d8b4db984d1006a476b8, type: 3}
+      propertyPath: 'itemPrefabs.Array.data[7]'
+      value: 
+      objectReference: {fileID: 138800, guid: 51f079bad8118b14cab58e4f572c38f2, type: 3}
     - target: {fileID: 3558681665991146867, guid: e1115885a263d8b4db984d1006a476b8, type: 3}
       propertyPath: m_Name
       value: GameManager

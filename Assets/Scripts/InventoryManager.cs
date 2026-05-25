@@ -130,7 +130,8 @@ public class InventoryManager : MonoBehaviour
                 prefabId = 0;
         }
 
-        GameObject itemObj = Instantiate(ItemPrefabs[prefabId], pos, Quaternion.identity);
+        Vector3 spawnPos = pos + new Vector3(0f, 0.5f, 0f);
+        GameObject itemObj = Instantiate(ItemPrefabs[prefabId], spawnPos, Quaternion.identity);
 
         ItemPick itemPick = itemObj.GetComponent<ItemPick>();
         if (itemPick == null)
@@ -157,6 +158,8 @@ public class InventoryManager : MonoBehaviour
 
                 spawnPos = new Vector3(pos.x + randomOffset.x, pos.y, pos.z + randomOffset.y);
                 SpawnDropItem(items[i], spawnPos);
+
+                Debug.Log($"Spawned item: <color=green>{items[i].ItemName}</color> from inventory slot <color=blue>{i}</color>");
             }
         }
     }

@@ -9,11 +9,8 @@ public class Enemy : Character
 
     void Start()
     {
-        Debug.Log("Enemy Start: " + name + ", invManager=" + (invManager != null));
-
         if (invManager == null)
         {
-            Debug.Log("Enemy " + name + " calling CharInit...");
             CharInit(VFXManager.Instance, UIManager.instance, InventoryManager.instance, PartyManager.instance);
         }
 
@@ -32,7 +29,6 @@ public class Enemy : Character
 
             if (!hasAnyItem)
             {
-                Debug.Log("Enemy " + name + " has no items, adding default items...");
                 InventoryManager.instance.AddItem(this, 0); //Health Potion
                 InventoryManager.instance.AddItem(this, 1); //Sword
                 InventoryManager.instance.AddItem(this, 2); //Shield
