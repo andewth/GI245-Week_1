@@ -7600,7 +7600,7 @@ Transform:
   m_GameObject: {fileID: 545636263}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 48.32, y: 10, z: 30.6}
+  m_LocalPosition: {x: 36.04, y: 10, z: 35.92}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -25709,7 +25709,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4234659679917268803, guid: 363874a102e7a904bb3415bbf02f7470, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 48.32
+      value: 36.04
       objectReference: {fileID: 0}
     - target: {fileID: 4234659679917268803, guid: 363874a102e7a904bb3415bbf02f7470, type: 3}
       propertyPath: m_LocalPosition.y
@@ -25717,7 +25717,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4234659679917268803, guid: 363874a102e7a904bb3415bbf02f7470, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 30.6
+      value: 35.92
       objectReference: {fileID: 0}
     - target: {fileID: 4234659679917268803, guid: 363874a102e7a904bb3415bbf02f7470, type: 3}
       propertyPath: m_LocalRotation.w
@@ -25755,6 +25755,10 @@ PrefabInstance:
       propertyPath: toMapName
       value: VillageScene
       objectReference: {fileID: 0}
+    - target: {fileID: 6722483133051674553, guid: 363874a102e7a904bb3415bbf02f7470, type: 3}
+      propertyPath: enterPointId
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -25769,9 +25773,13 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2404555328920952741, guid: e1115885a263d8b4db984d1006a476b8, type: 3}
+      propertyPath: monsters.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2404555328920952741, guid: e1115885a263d8b4db984d1006a476b8, type: 3}
       propertyPath: 'monsters.Array.data[0]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1834137596}
     - target: {fileID: 2404555328920952741, guid: e1115885a263d8b4db984d1006a476b8, type: 3}
       propertyPath: 'monsters.Array.data[1]'
       value: 

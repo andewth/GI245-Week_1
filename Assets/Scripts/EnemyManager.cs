@@ -20,11 +20,21 @@ public class EnemyManager : MonoBehaviour
     {
         foreach (Character m in monsters)
         {
+            if (m == null) 
+            {
+                Debug.LogWarning("Found an empty monster slot in EnemyManager. Skipping...");
+                continue; 
+            }
+
             m.CharInit(VFXManager.Instance, UIManager.instance, InventoryManager.instance, PartyManager.instance);
         }
 
-        InventoryManager.instance.AddItem(monsters[0], 0); //Health Potion
-        InventoryManager.instance.AddItem(monsters[0], 1); //Sword
-        InventoryManager.instance.AddItem(monsters[0], 2); //Shield
+
+        if (monsters.Count > 0 && monsters[0] != null)
+        {
+            InventoryManager.instance.AddItem(monsters[0], 0); //Health Potion
+            InventoryManager.instance.AddItem(monsters[0], 1); //Sword
+            InventoryManager.instance.AddItem(monsters[0], 2); //Shield
+        }
     }
 }

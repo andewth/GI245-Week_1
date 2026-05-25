@@ -16,6 +16,10 @@ public class MapManager : MonoBehaviour
 
     public void GoToMap(string mapName, int enterPointId)
     {
+        if (Settings.isChangingMap)
+            return;
+
+        Settings.isChangingMap = true;
         Settings.isWarping = true;
         Settings.enterPointId = enterPointId;
         Settings.partyCount = PartyManager.instance.Members.Count;

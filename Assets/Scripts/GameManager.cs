@@ -52,5 +52,7 @@ public class GameManager : MonoBehaviour
     void WarpPlayers()
     {
         PartyManager.instance.LoadAllHeroData();
+        Settings.nextWarpTime = Time.time + 1f;
+        Settings.isChangingMap = false;
     }
 }
