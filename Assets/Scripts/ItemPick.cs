@@ -33,6 +33,12 @@ public class ItemPick : MonoBehaviour
 
     public void PickUpItem()
     {
+        if (inventoryManager == null || partyManager == null || item == null)
+            return;
+
+        if (partyManager.SelectChars.Count == 0)
+            return;
+
         if (inventoryManager.AddItem(partyManager.SelectChars[0], item.ID))
         {
             Destroy(gameObject);

@@ -27,6 +27,9 @@ public class ItemDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (image == null)
+            return;
+
         Debug.Log("BeginDrag");
         iconParent = transform.parent;
         transform.SetParent(transform.root);
@@ -36,12 +39,18 @@ public class ItemDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (Mouse.current == null)
+            return;
+
         Debug.Log("Dragging");
         transform.position = Mouse.current.position.ReadValue();
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (image == null || iconParent == null)
+            return;
+
         Debug.Log("EndDrag");
         transform.SetParent(iconParent);
         image.raycastTarget = true;
@@ -50,7 +59,14 @@ public class ItemDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     private int FindIndexOfSlotParent()
     {
-        int id = iconParent.GetComponent<InventorySlot>().ID;
+        if (iconParent == null)
+            return -1;
+
+        InventorySlot slot = iconParent.GetComponent<InventorySlot>();
+        if (slot == null)
+            return -1;
+
+        int id = slot.ID;
         return id;
     }
 
@@ -59,9 +75,13 @@ public class ItemDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         if (eventData.button == PointerEventData.InputButton.Right)
         {
             Debug.Log("Right Click on Item");
-            if (item.Type == ItemType.Consumable)
+            if (item != null && uiManager != null && item.Type == ItemType.Consumable)
             {
-                uiManager.SetCurItemInUse(this, FindIndexOfSlotParent());
+                int slotId = FindIndexOfSlotParent();
+                if (slotId < 0)
+                    return;
+
+                uiManager.SetCurItemInUse(this, slotId);
                 uiManager.ToggleItemDialog(true);
             }
         }

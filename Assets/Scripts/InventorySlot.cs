@@ -25,8 +25,16 @@ public class InventorySlot : MonoBehaviour, IDropHandler
     public void OnDrop(PointerEventData eventData)
     {
         GameObject objA = eventData.pointerDrag;
+        if (objA == null)
+            return;
+
         ItemDrag itemDragA = objA.GetComponent<ItemDrag>();
+        if (itemDragA == null || itemDragA.IconParent == null || itemDragA.Item == null)
+            return;
+
         InventorySlot slotA = itemDragA.IconParent.GetComponent<InventorySlot>();
+        if (slotA == null)
+            return;
 
         if (itemType == ItemType.Shield)
         {
@@ -38,6 +46,8 @@ public class InventorySlot : MonoBehaviour, IDropHandler
         {
             GameObject objB = transform.GetChild(0).gameObject;
             ItemDrag itemDragB = objB.GetComponent<ItemDrag>();
+            if (itemDragB == null || itemDragB.Item == null)
+                return;
 
             if (slotA.ItemType == ItemType.Shield)
             {

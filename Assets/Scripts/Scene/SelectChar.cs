@@ -26,7 +26,16 @@ public class SelectChar : MonoBehaviour
 
     private void LoadChar()
     {
+        if (heroPrefabs == null || heroPrefabs.Length == 0)
+            return;
+
+        if (curId < 0 || curId >= heroPrefabs.Length)
+            curId = 0;
+
         Hero hero = heroPrefabs[curId].GetComponent<Hero>();
+        if (hero == null)
+            return;
+
         charImage.sprite = hero.AvatarPic;
         charNameText.text = hero.CharName;
 
@@ -66,6 +75,9 @@ public class SelectChar : MonoBehaviour
 
     public void BeginGame()
     {
+        if (heroPrefabs == null || heroPrefabs.Length == 0)
+            return;
+
         Settings.playerPrefabId = curId;
         Settings.isNewGame = true;
         SceneManager.LoadScene("VillageScene");

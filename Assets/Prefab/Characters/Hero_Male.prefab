@@ -2016,7 +2016,7 @@ GameObject:
   - component: {fileID: -6058823864054036322}
   - component: {fileID: 2013145722123512052}
   m_Layer: 6
-  m_Name: Character_Hero_Knight_Male_FixedScale 1
+  m_Name: Hero_Male
   m_TagString: Hero
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2136,7 +2136,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Hero
   state: 0
   avatarPic: {fileID: 21300000, guid: 483711f889ea8834ba993808b4e87740, type: 3}
-  charName: 
+  charName: Man
   ringSelection: {fileID: 7119339914288081122}
   curHP: 100
   maxHp: 100
@@ -2177,7 +2177,7 @@ MonoBehaviour:
     normalPrice: 0
   shieldHand: {fileID: 4139452749197756}
   shieldObj: {fileID: 0}
-  weaponHand: {fileID: 0}
+  weaponHand: {fileID: 4524380348334466}
   weaponObj: {fileID: 0}
   defensePower: 0
   exp: 0
@@ -2189,6 +2189,7 @@ MonoBehaviour:
   wisdom: 8
   charisma: 12
   nextExp: 30
+  prefabId: 0
 --- !u!114 &-6058823864054036322
 MonoBehaviour:
   m_ObjectHideFlags: 0

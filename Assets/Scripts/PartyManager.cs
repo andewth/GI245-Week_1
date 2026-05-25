@@ -38,56 +38,121 @@ public class PartyManager : MonoBehaviour
     }
 
 
+    // void Start()
+    // {
+    //     // foreach (Character c in members)
+    //     // {
+    //     //     c.CharInit(VFXManager.Instance, UIManager.instance, InventoryManager.instance, this);
+    //     // }
+
+    //     if (members.Count > 0)
+    //         SelectSingleHero(0);
+
+    //     // members[0].MagicSkills.Add(new Magic(0, "Power Glow", 10f, 20, 3f, 1f, 2, 2));  // Skill 2
+    //     // members[0].MagicSkills.Add(new Magic(1, "Fire Explosion", 10f, 20, 3f, 1f, 1, 3));   // Skill 3
+    //     // members[0].MagicSkills.Add(new Magic(2, "Experien Gain", 10f, 20, 3f, 1f, 2, 4));  // Skill 4
+
+    //     // members[1].MagicSkills.Add(new Magic(0, "Power Glow", 10f, 20, 3f, 1f, 2, 2));   // Skill 2
+    //     // members[1].MagicSkills.Add(new Magic(1, "Electric", 10f, 20, 3f, 1f, 0, 5));    // Skill 3
+    //     // members[1].MagicSkills.Add(new Magic(2, "Firework", 10f, 20, 3f, 1f, 0, 6));  // Skill 4
+
+
+    //     /*
+    //     members[0].MagicSkills.Add(new Magic(VFXManager.Instance.MagicData[0]));
+    //     members[1].MagicSkills.Add(new Magic(VFXManager.Instance.MagicData[1]));
+
+    //     InventoryManager.instance.AddItem(members[0], 0);   // Heal potion
+    //     InventoryManager.instance.AddItem(members[0], 1);   // Sword
+    //     InventoryManager.instance.AddItem(members[0], 2);   // Sword
+    //     InventoryManager.instance.AddItem(members[0], 3);   // Sword
+    //     InventoryManager.instance.AddItem(members[0], 4);   // Sword
+    //     InventoryManager.instance.AddItem(members[0], 5);   // Sword
+    //     InventoryManager.instance.AddItem(members[0], 6);   // Sword
+    //     InventoryManager.instance.AddItem(members[0], 7);   // Sword
+    //     InventoryManager.instance.AddItem(members[0], 8);   // Sword
+    //     InventoryManager.instance.AddItem(members[0], 9);   // Sword
+
+    //     InventoryManager.instance.AddItem(members[1], 0);   // Heal potion
+    //     InventoryManager.instance.AddItem(members[1], 1);   // Sword
+    //     InventoryManager.instance.AddItem(members[1], 2);   // Shield
+    //     InventoryManager.instance.AddItem(members[1], 3);   // Shield
+    //     */
+
+
+    //     UIManager.instance.ShowMagicToggles();
+    // }
+
+
     void Start()
     {
-        // foreach (Character c in members)
-        // {
-        //     c.CharInit(VFXManager.Instance, UIManager.instance, InventoryManager.instance, this);
-        // }
+        // 1. กันบัคกรณีที่ลิสต์ members เป็น null
+        if (members == null)
+        {
+            Debug.LogWarning("Members list is null!");
+            return;
+        }
 
+        // 2. กันบัคกรณีที่ Managers ต่างๆ ยังไม่ถูกสร้าง (ป้องกัน NullReferenceException)
+        if (VFXManager.Instance == null || InventoryManager.instance == null || UIManager.instance == null)
+        {
+            Debug.LogError("Managers are not fully initialized!");
+            return;
+        }
+
+        // เช็คว่ามีสมาชิกอย่างน้อย 1 ตัว (Index 0)
         if (members.Count > 0)
+        {
             SelectSingleHero(0);
 
-        // members[0].MagicSkills.Add(new Magic(0, "Power Glow", 10f, 20, 3f, 1f, 2, 2));  // Skill 2
-        // members[0].MagicSkills.Add(new Magic(1, "Fire Explosion", 10f, 20, 3f, 1f, 1, 3));   // Skill 3
-        // members[0].MagicSkills.Add(new Magic(2, "Experien Gain", 10f, 20, 3f, 1f, 2, 4));  // Skill 4
+            // เช็คอีกชั้นว่าออบเจกต์ในตำแหน่งที่ 0 ไม่ใช่ null จริงๆ
+            if (members[0] != null)
+            {
+                // กันบัค Array Out of Bounds ของ MagicData
+                if (VFXManager.Instance.MagicData != null && VFXManager.Instance.MagicData.Length > 0)
+                {
+                    members[0].MagicSkills.Add(new Magic(VFXManager.Instance.MagicData[0]));
+                }
 
-        // members[1].MagicSkills.Add(new Magic(0, "Power Glow", 10f, 20, 3f, 1f, 2, 2));   // Skill 2
-        // members[1].MagicSkills.Add(new Magic(1, "Electric", 10f, 20, 3f, 1f, 0, 5));    // Skill 3
-        // members[1].MagicSkills.Add(new Magic(2, "Firework", 10f, 20, 3f, 1f, 0, 6));  // Skill 4
+                // ใช้ For Loop เพื่อลดการเขียนโค้ดซ้ำ (ลด Human Error และดูสะอาดขึ้น)
+                for (int i = 0; i <= 9; i++)
+                {
+                    InventoryManager.instance.AddItem(members[0], i);
+                }
+            }
+        }
 
+        // 3. กันบัคกรณีลิสต์มีคนเดียวก่อนเรียกใช้ตำแหน่งที่ 1 (Index 1)
+        if (members.Count > 1)
+        {
+            if (members[1] != null)
+            {
+                // กันบัค Array Out of Bounds ของ MagicData
+                if (VFXManager.Instance.MagicData != null && VFXManager.Instance.MagicData.Length > 1)
+                {
+                    members[1].MagicSkills.Add(new Magic(VFXManager.Instance.MagicData[1]));
+                }
 
-        /*
-        members[0].MagicSkills.Add(new Magic(VFXManager.Instance.MagicData[0]));
-        members[1].MagicSkills.Add(new Magic(VFXManager.Instance.MagicData[1]));
-
-        InventoryManager.instance.AddItem(members[0], 0);   // Heal potion
-        InventoryManager.instance.AddItem(members[0], 1);   // Sword
-        InventoryManager.instance.AddItem(members[0], 2);   // Sword
-        InventoryManager.instance.AddItem(members[0], 3);   // Sword
-        InventoryManager.instance.AddItem(members[0], 4);   // Sword
-        InventoryManager.instance.AddItem(members[0], 5);   // Sword
-        InventoryManager.instance.AddItem(members[0], 6);   // Sword
-        InventoryManager.instance.AddItem(members[0], 7);   // Sword
-        InventoryManager.instance.AddItem(members[0], 8);   // Sword
-        InventoryManager.instance.AddItem(members[0], 9);   // Sword
-
-        InventoryManager.instance.AddItem(members[1], 0);   // Heal potion
-        InventoryManager.instance.AddItem(members[1], 1);   // Sword
-        InventoryManager.instance.AddItem(members[1], 2);   // Shield
-        InventoryManager.instance.AddItem(members[1], 3);   // Shield
-        */
-
+                for (int i = 0; i <= 3; i++)
+                {
+                    InventoryManager.instance.AddItem(members[1], i);
+                }
+            }
+        }
 
         UIManager.instance.ShowMagicToggles();
     }
 
+
+
     void Update()
     {
+        if (Keyboard.current == null)
+            return;
+
         // if (Input.GetKeyDown(KeyCode.M))
         if (Keyboard.current.mKey.wasPressedThisFrame)
         {
-            if (selectChars.Count > 0)
+            if (selectChars.Count > 0 && selectChars[0].MagicSkills.Count > 0)
             {
                 selectChars[0].IsMagicMode = true;
                 selectChars[0].CurMagicCast = selectChars[0].MagicSkills[0];
@@ -129,6 +194,9 @@ public class PartyManager : MonoBehaviour
     public void HeroSelectMagicSkill(int i)
     {
         if (selectChars.Count <= 0)
+            return;
+
+        if (i < 0 || i >= selectChars[0].MagicSkills.Count)
             return;
 
         selectChars[0].IsMagicMode = true;
@@ -187,6 +255,9 @@ public class PartyManager : MonoBehaviour
         if (id == -1 || id == 0)
             return;
 
+        if (id < 0 || id >= members.Count)
+            return;
+
         if (selectChars.Contains(members[id]))
             selectChars.Remove(members[id]);
 
@@ -196,6 +267,9 @@ public class PartyManager : MonoBehaviour
 
     public void DistributeTotalExp(int n)
     {
+        if (members.Count == 0)
+            return;
+
         totalExp = n;
         int eachHeroExp = totalExp / members.Count;
 
@@ -220,16 +294,25 @@ public class PartyManager : MonoBehaviour
 
     public void SaveAllHeroData()
     {
-        for (int i = 0; i < members.Count; i++)
+        int count = Mathf.Min(members.Count, heroData.Length);
+
+        for (int i = 0; i < count; i++)
         {
-            Hero hero = (Hero)members[i];
+            Hero hero = members[i] as Hero;
+            if (hero == null)
+                continue;
+
             heroData[i].prefabId = hero.PrefabID;
             heroData[i].curHp = hero.CurHP;
 
-            for (int j = 0; j < hero.MagicSkills.Count; j++)
-                heroData[i].magicIds[j] = hero.MagicSkills[j].ID;
+            heroData[i].magicIds.Clear();
 
-            for (int k = 0; k < hero.InventoryItems.Length; k++)
+            for (int j = 0; j < hero.MagicSkills.Count; j++)
+                heroData[i].magicIds.Add(hero.MagicSkills[j].ID);
+
+            int itemCount = Mathf.Min(hero.InventoryItems.Length, heroData[i].inventoryItemIds.Length);
+
+            for (int k = 0; k < itemCount; k++)
             {
                 if (hero.InventoryItems[k] == null)
                     heroData[i].inventoryItemIds[k] = -1;
@@ -248,11 +331,23 @@ public class PartyManager : MonoBehaviour
 
     public void LoadAllHeroData()
     {
+        members.Clear();
+        selectChars.Clear();
+
         int enterId = Settings.enterPointId;
+
+        if (enterId < 0 || enterId >= MapManager.instance.EnterPoints.Length)
+            enterId = 0;
+
         Vector3 pos = MapManager.instance.EnterPoints[enterId].position;
 
-        for (int i = 0; i < Settings.partyCount; i++)
+        int count = Mathf.Min(Settings.partyCount, heroData.Length);
+
+        for (int i = 0; i < count; i++)
         {
+            if (heroData[i].prefabId < 0 || heroData[i].prefabId >= GameManager.instance.HeroPrefabs.Length)
+                continue;
+
             GameObject heroObj =
                 Instantiate(GameManager.instance.HeroPrefabs[heroData[i].prefabId],
                 pos, Quaternion.identity);
@@ -271,13 +366,18 @@ public class PartyManager : MonoBehaviour
             for (int j = 0; j < heroData[i].magicIds.Count; j++)
             {
                 int magicId = heroData[i].magicIds[j];
+                if (magicId < 0 || magicId >= VFXManager.Instance.MagicData.Length)
+                    continue;
+
                 hero.MagicSkills.Add(new Magic(VFXManager.Instance.MagicData[magicId]));
             }
 
-            for (int k = 0; k < heroData[i].inventoryItemIds.Length; k++)
+            int itemCount = Mathf.Min(heroData[i].inventoryItemIds.Length, hero.InventoryItems.Length);
+
+            for (int k = 0; k < itemCount; k++)
             {
                 int itemId = heroData[i].inventoryItemIds[k];
-                if (itemId != -1)
+                if (itemId >= 0 && itemId < InventoryManager.instance.ItemData.Length)
                     hero.InventoryItems[k] =
                         new Item(InventoryManager.instance.ItemData[itemId]);
             }

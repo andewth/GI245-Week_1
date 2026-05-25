@@ -33,6 +33,9 @@ public class GameManager : MonoBehaviour
     {
         int i = Settings.playerPrefabId;
 
+        if (i < 0 || i >= heroPrefabs.Length)
+            i = 0;
+
         GameObject heroObj = Instantiate(heroPrefabs[i], 
             new Vector3(46f, 10f, 38f), Quaternion.identity);
 

@@ -2751,7 +2751,7 @@ GameObject:
   - component: {fileID: -2886351195332296066}
   - component: {fileID: 1749234957971277407}
   m_Layer: 6
-  m_Name: Character_Goblin_Warrior_Male_FixedScale 1
+  m_Name: Goblin_Warrior_Male
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

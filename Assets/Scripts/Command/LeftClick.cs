@@ -1,7 +1,5 @@
-using System.Numerics;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
@@ -15,6 +13,7 @@ public class LeftClick : MonoBehaviour
     [SerializeField] private RectTransform boxSelection;
     private UnityEngine.Vector2 oldAnchoredPos;
     private UnityEngine.Vector2 startPos;
+    private bool startedOverUI;
 
 
     public static LeftClick instance;
@@ -31,13 +30,17 @@ public class LeftClick : MonoBehaviour
 
     void Update()
     {
+        if (Mouse.current == null)
+            return;
+
         // mouse down (เมื่อเริ่มคลิก)
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
             startPos = Mouse.current.position.value;
+            startedOverUI = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
 
             //if click UI, don't clear (ถ้าคลิกโดน UI ไม่ต้องทำอะไร)
-            if (EventSystem.current.IsPointerOverGameObject())
+            if (startedOverUI)
                 return;
 
             // ClearEverything();
@@ -46,6 +49,9 @@ public class LeftClick : MonoBehaviour
         // mouse hold down (เมื่อกดค้างเพื่อลาก)
         if (Mouse.current.leftButton.isPressed)
         {
+            if (startedOverUI)
+                return;
+
             //if click UI, don't check
             // if (EventSystem.current.IsPointerOverGameObject())
             //     return;
@@ -56,6 +62,12 @@ public class LeftClick : MonoBehaviour
         // mouse up (เมื่อปล่อยเมาส์)
         if (Mouse.current.leftButton.wasReleasedThisFrame)
         {
+            if (startedOverUI)
+            {
+                startedOverUI = false;
+                return;
+            }
+
             bool selectedByBox = ReleaseSelectionBox(Mouse.current.position.value);
 
             if (!selectedByBox)
@@ -211,7 +223,15 @@ public class LeftClick : MonoBehaviour
         //Debug.Log("Pick Item: " + itemPick.Item.ItemName);
 
         if (PartyManager.instance.SelectChars.Count == 0)
-            UIManager.instance.ToggleAvatar[0].isOn = true;
+        {
+            if (PartyManager.instance.Members.Count == 0)
+                return;
+
+            if (UIManager.instance.ToggleAvatar.Length > 0)
+                UIManager.instance.ToggleAvatar[0].isOn = true;
+
+            PartyManager.instance.SelectSingleHero(0);
+        }
 
         if (itemPick != null)
         {

@@ -27,6 +27,9 @@ public class QuestManager : MonoBehaviour
 
     private void AddQuestToNPC(Npc npc, QuestData questData)
     {
+        if (npc == null || questData == null)
+            return;
+
         Quest quest = new Quest(questData);
         npc.QuestToGive.Add(quest);
     }
@@ -34,16 +37,27 @@ public class QuestManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        if (npcPerson == null)
+            return;
+
         foreach (Character npc in npcPerson)
         {
+            if (npc == null)
+                continue;
+
             npc.CharInit(VFXManager.Instance, UIManager.instance, InventoryManager.instance, PartyManager.instance);
         }
-        AddQuestToNPC(npcPerson[0], questData[0]); //Give Golem - Give Potion Quest
+
+        if (npcPerson.Length > 0 && questData != null && questData.Length > 0)
+            AddQuestToNPC(npcPerson[0], questData[0]); //Give Golem - Give Potion Quest
     }
 
 
     public Quest CheckForQuest(Npc npc, QuestStatus status)
     {
+        if (npc == null)
+            return null;
+
         curNpc = npc;
 
         Quest quest = npc.CheckQuestList(status);
@@ -54,11 +68,17 @@ public class QuestManager : MonoBehaviour
 
     private bool CheckItemToDelivery()
     {
+        if (curQuest == null)
+            return false;
+
         return InventoryManager.instance.CheckPartyForItem(curQuest.QuestItemId);
     }
 
     public bool CheckIfFinishQuest()
     {
+        if (curQuest == null)
+            return false;
+
         bool success = false;
 
         Debug.Log(curQuest.Type);
@@ -74,6 +94,9 @@ public class QuestManager : MonoBehaviour
 
     public bool CheckLastDialogue(int i)
     {
+        if (curQuest == null || curQuest.QuestDialogue == null)
+            return true;
+
         if (i == curQuest.QuestDialogue.Length - 1)
             return true;
         else
@@ -82,6 +105,9 @@ public class QuestManager : MonoBehaviour
 
     public string NextDialogue(int i) //map with ButtonNext
     {
+        if (curQuest == null || curQuest.QuestDialogue == null)
+            return "";
+
         if (i < curQuest.QuestDialogue.Length)
             return curQuest.QuestDialogue[i];
         else
@@ -90,20 +116,31 @@ public class QuestManager : MonoBehaviour
 
     public bool DeliverItem()
     {
+        if (curQuest == null)
+            return false;
+
         return InventoryManager.instance.RemoveItemFromParty(curQuest.QuestItemId);
     }
 
 
     public bool NpcGiveReward()
     {
+        if (curQuest == null)
+            return false;
+
         if (PartyManager.instance.SelectChars.Count == 0)
             return false;
 
         Character hero = PartyManager.instance.SelectChars[0];
 
+        if (hero == null || curQuest.RewardItemId < 0 || curQuest.RewardItemId >= InventoryManager.instance.ItemData.Length)
+            return false;
+
         Item item = new Item(InventoryManager.instance.ItemData[curQuest.RewardItemId]);
 
-        for (int i = 0; i < 16; i++)
+        int count = Mathf.Min(16, hero.InventoryItems.Length);
+
+        for (int i = 0; i < count; i++)
         {
             if(hero.InventoryItems[i] == null)
             {
@@ -118,11 +155,17 @@ public class QuestManager : MonoBehaviour
 
     public void RejectQuest() //map with ButtonReject
     {
+        if (curQuest == null)
+            return;
+
         curQuest.Status = QuestStatus.Reject;
     }
 
     public void AcceptQuest() //map with ButtonAccept
     {
+        if (curQuest == null)
+            return;
+
         curQuest.Status = QuestStatus.InProgress;
         PartyManager.instance.QuestList.Add(curQuest);
     }

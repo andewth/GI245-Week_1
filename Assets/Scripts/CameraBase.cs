@@ -83,6 +83,9 @@ public class CameraBase : MonoBehaviour
 
     private void Zoom()
     {
+        if (Keyboard.current == null)
+            return;
+
         zoomValue =  zoomAction.ReadValue<Vector2>();
         float zoomInput = zoomValue.y * 5f;
 

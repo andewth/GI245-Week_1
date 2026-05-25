@@ -30,6 +30,9 @@ public class InventoryManager : MonoBehaviour
 
     public bool AddItem(Character character, int id)
     {
+        if (character == null || id < 0 || id >= itemData.Length)
+            return false;
+
         Item item = new Item(itemData[id]);
 
         for (int i = 0; i < character.InventoryItems.Length; i++)
@@ -48,6 +51,9 @@ public class InventoryManager : MonoBehaviour
     public void SaveItemInBag(int index, Item item)
     {
         if (PartyManager.instance.SelectChars.Count == 0)
+            return;
+
+        if (index < 0 || index >= PartyManager.instance.SelectChars[0].InventoryItems.Length || item == null)
             return;
         
         PartyManager.instance.SelectChars[0].InventoryItems[index] = item;
@@ -71,6 +77,8 @@ public class InventoryManager : MonoBehaviour
         if (PartyManager.instance.SelectChars.Count == 0)
             return;
 
+        if (index < 0 || index >= PartyManager.instance.SelectChars[0].InventoryItems.Length)
+            return;
 
         PartyManager.instance.SelectChars[0].InventoryItems[index] = null;
 
@@ -88,6 +96,9 @@ public class InventoryManager : MonoBehaviour
 
     private void SpawnDropItem(Item item, Vector3 pos)
     {
+        if (item == null || ItemPrefabs == null || ItemPrefabs.Length == 0)
+            return;
+
         int id;
 
         switch (item.Type)
@@ -99,6 +110,9 @@ public class InventoryManager : MonoBehaviour
                 id = 0;
                 break;
         }
+
+        if (id < 0 || id >= ItemPrefabs.Length)
+            id = 0;
 
         GameObject itemObj = Instantiate(ItemPrefabs[id], pos, Quaternion.identity);
 
@@ -115,6 +129,9 @@ public class InventoryManager : MonoBehaviour
     public float dropRadius = 2.0f;
     public void SpawnDropInventory(Item[] items, Vector3 pos)
     {
+        if (items == null)
+            return;
+
         for (int i = 0; i < items.Length; i++)
         {
             if (items[i] != null)
@@ -131,6 +148,9 @@ public class InventoryManager : MonoBehaviour
 
     public void DrinkConsumableItem(Item item, int slotId)
     {
+        if (item == null)
+            return;
+
         string s = string.Format("Drink: {0}", item.ItemName);
         Debug.Log(s);
 
@@ -144,6 +164,9 @@ public class InventoryManager : MonoBehaviour
 
     public bool CheckPartyForItem(int id)
     {
+        if (id < 0 || id >= itemData.Length)
+            return false;
+
         Item item = new Item(itemData[id]);
         Debug.Log(item.ItemName);
 
@@ -151,8 +174,14 @@ public class InventoryManager : MonoBehaviour
 
         foreach (Character hero in party)
         {
+            if (hero == null)
+                continue;
+
             for (int i = 0; i < hero.InventoryItems.Length; i++)
             {
+                if (hero.InventoryItems[i] == null)
+                    continue;
+
                 Debug.Log(hero.InventoryItems[i].ItemName);
                 if (hero.InventoryItems[i].ID == item.ID)
                     return true;
@@ -165,6 +194,9 @@ public class InventoryManager : MonoBehaviour
 
     public bool RemoveItemFromParty(int id)
     {
+        if (id < 0 || id >= itemData.Length)
+            return false;
+
         Item item = new Item(itemData[id]);
         Debug.Log($"Finding {item.ItemName}");
 
@@ -172,8 +204,14 @@ public class InventoryManager : MonoBehaviour
 
         foreach (Character hero in selectedHero)
         {
+            if (hero == null)
+                continue;
+
             for (int i = 0; i < hero.InventoryItems.Length; i++)
             {
+                if (hero.InventoryItems[i] == null)
+                    continue;
+
                 if (hero.InventoryItems[i].ID == item.ID)
                 {
                     Debug.Log($"Removing {hero.InventoryItems[i].ItemName}");

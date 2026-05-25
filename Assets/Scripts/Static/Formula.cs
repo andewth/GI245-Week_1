@@ -5,6 +5,9 @@ public static class Formula
     
     public static Character FindClosestEnemyChar(Character me)
     {
+        if (me == null)
+            return null;
+
         LayerMask charLayer = LayerMask.GetMask("Character");
         Character closestTarget = null;
         float closestDist = 0f;

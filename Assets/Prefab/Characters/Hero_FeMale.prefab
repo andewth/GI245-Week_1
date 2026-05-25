@@ -3840,7 +3840,7 @@ GameObject:
   - component: {fileID: -3241035792256076594}
   - component: {fileID: 1897620372437402864}
   m_Layer: 6
-  m_Name: Character_Hero_Knight_Female_FixedScale 1
+  m_Name: Hero_FeMale
   m_TagString: Hero
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3960,7 +3960,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Hero
   state: 0
   avatarPic: {fileID: 21300000, guid: 48a3736e8718db64f9f615e31ecfe41e, type: 3}
-  charName: 
+  charName: Ben
   ringSelection: {fileID: 7279378025457530227}
   curHP: 100
   maxHp: 100
