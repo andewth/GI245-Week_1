@@ -39,27 +39,5 @@ public class EnemyManager : MonoBehaviour
         }
 
 
-        foreach (Enemy m in monsters)
-        {
-            if (m == null)
-                continue;
-
-            int itemCount = InventoryManager.instance.ItemData.Length;
-            if (itemCount == 0)
-                continue;
-
-            // Random 1-3 items per enemy, can be duplicates or different items
-            int itemsToGive = Random.Range(1, 4); // 1 to 3 items
-
-            for (int i = 0; i < itemsToGive; i++)
-            {
-                int itemId = Random.Range(0, itemCount);
-                int slot = InventoryManager.instance.AddItem(m, itemId);
-                if (slot >= 0)
-                {
-                    Debug.Log($"Enemy {m.name} got item <color=green>{InventoryManager.instance.ItemData[itemId].itemName}</color> (id={itemId}) at slot <color=blue>{slot}</color>");
-                }
-            }
-        }
     }
 }

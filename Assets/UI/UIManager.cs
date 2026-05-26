@@ -798,6 +798,7 @@ public class UIManager : MonoBehaviour
 
             curShopNpc.NpcMoney -= totalPrice;
             PartyManager.instance.PartyMoney += totalPrice;
+            PartyManager.instance.SaveAllHeroData();
 
             shopMoneyText.text = curShopNpc.NpcMoney.ToString();
             heroMoneyText.text = PartyManager.instance.PartyMoney.ToString();
@@ -841,6 +842,7 @@ public class UIManager : MonoBehaviour
 
             curShopNpc.NpcMoney += totalCost;
             PartyManager.instance.PartyMoney -= totalCost;
+            PartyManager.instance.SaveAllHeroData();
 
             shopMoneyText.text = curShopNpc.NpcMoney.ToString();
             heroMoneyText.text = PartyManager.instance.PartyMoney.ToString();

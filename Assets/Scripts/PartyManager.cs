@@ -115,10 +115,6 @@ public class PartyManager : MonoBehaviour
                 }
 
                 // ใช้ For Loop เพื่อลดการเขียนโค้ดซ้ำ (ลด Human Error และดูสะอาดขึ้น)
-                for (int i = 0; i <= 9; i++)
-                {
-                    InventoryManager.instance.AddItem(members[0], i);
-                }
             }
         }
 
@@ -133,10 +129,6 @@ public class PartyManager : MonoBehaviour
                     members[1].MagicSkills.Add(new Magic(VFXManager.Instance.MagicData[1]));
                 }
 
-                for (int i = 0; i <= 3; i++)
-                {
-                    InventoryManager.instance.AddItem(members[1], i);
-                }
             }
         }
 
