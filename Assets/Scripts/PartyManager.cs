@@ -111,6 +111,7 @@ public class PartyManager : MonoBehaviour
                 if (VFXManager.Instance.MagicData != null && VFXManager.Instance.MagicData.Length > 0)
                 {
                     members[0].MagicSkills.Add(new Magic(VFXManager.Instance.MagicData[0]));
+                    members[0].MagicSkills.Add(new Magic(VFXManager.Instance.MagicData[1]));
                 }
 
                 // ใช้ For Loop เพื่อลดการเขียนโค้ดซ้ำ (ลด Human Error และดูสะอาดขึ้น)

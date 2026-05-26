@@ -92,9 +92,20 @@ MonoBehaviour:
   - {fileID: 1822826418782532, guid: 7320466f3036be84cb80f3b7d6039a80, type: 3}
   - {fileID: 1251993928265596, guid: 03c1c2dd20eb48c4cab0b485f0c79761, type: 3}
   - {fileID: 1906021416640072, guid: 5c12b042375f57a4694ed1119964b387, type: 3}
+  - {fileID: 1334071670866236, guid: c240177115e87e84aaeeb7c1ebfa1895, type: 3}
+  - {fileID: 1698068915230344, guid: d8a192b355afb704c818a3fac292287c, type: 3}
+  - {fileID: 1796635450895110, guid: 7a5a669c2b92382498c5c9e69d947208, type: 3}
   magicData:
   - {fileID: 11400000, guid: 56eaa611223128a4298bddc11f9c8e52, type: 2}
   - {fileID: 11400000, guid: 62f2cf10d2e91cd40827c1b5f9893f5c, type: 2}
+  - {fileID: 11400000, guid: ec368230f385c024497d53e37a24cada, type: 2}
+  - {fileID: 11400000, guid: c7048b8ee417c2f41b6908aa493bf9b2, type: 2}
+  - {fileID: 11400000, guid: 37bbe1d0303076343aadf44c0b27ea4e, type: 2}
+  - {fileID: 11400000, guid: 6b80beb777e18e24e8ef0b938e2242a0, type: 2}
+  - {fileID: 11400000, guid: a8a04ff0698aa7b4aaae9ec4f4bf0252, type: 2}
+  - {fileID: 11400000, guid: 72a4b63cdce8ba34f926b95d49c6229f, type: 2}
+  - {fileID: 11400000, guid: e1f21dbc67d0d3940b4fe829a3e7611a, type: 2}
+  - {fileID: 11400000, guid: 0dd8bc4f772379d449668331e17db1a6, type: 2}
 --- !u!114 &4598362334788641528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,9 +143,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InventoryManager
   itemPrefabs:
-  - {fileID: 2183001951008068311, guid: e88b71b608200ce418f40f3bd34245be, type: 3}
   - {fileID: 157152, guid: 432f5f8439a91ea4582c39bb83ad59e3, type: 3}
+  - {fileID: 138470, guid: 630627b9fd11d4340a42d44621ddcfa7, type: 3}
   - {fileID: 149276, guid: a33323d27d42f614eb7a06a077b97944, type: 3}
+  - {fileID: 2183001951008068311, guid: e88b71b608200ce418f40f3bd34245be, type: 3}
   - {fileID: 134266, guid: 41a1a08a4be8e73439675af400e7ae66, type: 3}
   - {fileID: 114634, guid: e4e5ed7e96964164382f008e86da89f7, type: 3}
   - {fileID: 138470, guid: 630627b9fd11d4340a42d44621ddcfa7, type: 3}
@@ -165,9 +177,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyManager
   monsters:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 241825260200218393, guid: 9a6b87430c6b2684aa9c1d4616d38a60, type: 3}
+  - {fileID: -2886351195332296066, guid: 2d8fb3ec7b6be93449c38541d369ad56, type: 3}
+  - {fileID: 1063947127829844649, guid: f602827cc78eba64cbf9a737cd100ee3, type: 3}
+  - {fileID: 3030599571256592818, guid: a093d3eab309cfc42a9a4274b966e793, type: 3}
 --- !u!114 &8643631627180961283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,7 +194,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::QuestManager
   npcPerson:
-  - {fileID: 0}
+  - {fileID: 6750256690267869513, guid: a3d5fc958c4bf214291bfc4570c70721, type: 3}
   - {fileID: 0}
   questData:
   - {fileID: 11400000, guid: 94e29ed53ad381840bc9f3287403c6c3, type: 2}
@@ -217,6 +230,8 @@ MonoBehaviour:
   heroPrefabs:
   - {fileID: 1753741187899190, guid: b9cad8a63047237408fc0ee57ac87657, type: 3}
   - {fileID: 1428387009061096, guid: 75ce277f87b76c042a3aa43e83d6460a, type: 3}
+  - {fileID: 171076, guid: 2c4e6368d28e08b4aa0d9294390998e9, type: 3}
+  - {fileID: 128260, guid: e643ad0febdb00b4fa387ac24e48e616, type: 3}
 --- !u!114 &4972700377856153578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,4 +244,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8b97132590064b48a0e80e753421004, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MapManager
-  enterPoints: []
+  enterPoints:
+  - {fileID: 0}

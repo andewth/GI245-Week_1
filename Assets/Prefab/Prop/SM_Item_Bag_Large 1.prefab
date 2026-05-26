@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 381513790631293698}
   - component: {fileID: 8379623415407949431}
   - component: {fileID: 4596346496599604505}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SM_Item_Bag_Large 1
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
