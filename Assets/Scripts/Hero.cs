@@ -181,16 +181,30 @@ public class Hero : Character
             {
                 switch (level)
                 {
-                    case 5:
+                    case 3:
                         if (VFXManager.Instance.MagicData.Length > 0)
                             magicSkills.Add(new Magic(VFXManager.Instance.MagicData[0]));
                         if (uiManager != null)
                             uiManager.ShowMagicToggles();
                         break;
 
-                    case 10:
+                    case 5:
                         if (VFXManager.Instance.MagicData.Length > 1)
                             magicSkills.Add(new Magic(VFXManager.Instance.MagicData[1]));
+                        if (uiManager != null)
+                            uiManager.ShowMagicToggles();
+                        break;
+
+                    case 7:
+                        if (VFXManager.Instance.MagicData.Length > 2)
+                            magicSkills.Add(new Magic(VFXManager.Instance.MagicData[2]));
+                        if (uiManager != null)
+                            uiManager.ShowMagicToggles();
+                        break;
+
+                    case 10:
+                        if (VFXManager.Instance.MagicData.Length > 3)
+                            magicSkills.Add(new Magic(VFXManager.Instance.MagicData[3]));
                         if (uiManager != null)
                             uiManager.ShowMagicToggles();
                         break;

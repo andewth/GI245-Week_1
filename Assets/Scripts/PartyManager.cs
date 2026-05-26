@@ -107,14 +107,6 @@ public class PartyManager : MonoBehaviour
             // เช็คอีกชั้นว่าออบเจกต์ในตำแหน่งที่ 0 ไม่ใช่ null จริงๆ
             if (members[0] != null)
             {
-                // กันบัค Array Out of Bounds ของ MagicData
-                if (VFXManager.Instance.MagicData != null && VFXManager.Instance.MagicData.Length > 0)
-                {
-                    members[0].MagicSkills.Add(new Magic(VFXManager.Instance.MagicData[0]));
-                    members[0].MagicSkills.Add(new Magic(VFXManager.Instance.MagicData[1]));
-                }
-
-                // ใช้ For Loop เพื่อลดการเขียนโค้ดซ้ำ (ลด Human Error และดูสะอาดขึ้น)
             }
         }
 
@@ -123,12 +115,6 @@ public class PartyManager : MonoBehaviour
         {
             if (members[1] != null)
             {
-                // กันบัค Array Out of Bounds ของ MagicData
-                if (VFXManager.Instance.MagicData != null && VFXManager.Instance.MagicData.Length > 1)
-                {
-                    members[1].MagicSkills.Add(new Magic(VFXManager.Instance.MagicData[1]));
-                }
-
             }
         }
 
