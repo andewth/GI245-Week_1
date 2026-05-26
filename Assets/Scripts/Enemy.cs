@@ -14,7 +14,7 @@ public class Enemy : Character
             CharInit(VFXManager.Instance, UIManager.instance, InventoryManager.instance, PartyManager.instance);
         }
 
-        // Fallback: if this enemy is NOT in EnemyManager list, add items here
+        // Fallback: if this enemy is NOT in EnemyManager list, add random items
         if (InventoryManager.instance != null && inventoryItems != null)
         {
             bool hasAnyItem = false;
@@ -29,9 +29,16 @@ public class Enemy : Character
 
             if (!hasAnyItem)
             {
-                InventoryManager.instance.AddItem(this, 0); //Health Potion
-                InventoryManager.instance.AddItem(this, 1); //Sword
-                InventoryManager.instance.AddItem(this, 2); //Shield
+                int itemCount = InventoryManager.instance.ItemData.Length;
+                if (itemCount > 0)
+                {
+                    int itemsToGive = Random.Range(1, 4); // 1 to 3 items
+                    for (int i = 0; i < itemsToGive; i++)
+                    {
+                        int itemId = Random.Range(0, itemCount);
+                        InventoryManager.instance.AddItem(this, itemId);
+                    }
+                }
             }
         }
     }

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3367046}
   - component: {fileID: 2312352}
   - component: {fileID: 64500261113895048}
+  - component: {fileID: 3650611988807570324}
   m_Layer: 8
   m_Name: SM_Wep_Shield_Round_01 1
   m_TagString: Item
@@ -29,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -113,3 +114,23 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 43970609166897040, guid: d377537d6624f374497d1906bb6a7bdd, type: 2}
+--- !u!114 &3650611988807570324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 149276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f91a0f6d468c1fe41a36ac7dbde8d18a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ItemPick
+  item:
+    id: 2
+    itemName: ShieldA
+    type: 1
+    icon: {fileID: 21300000, guid: 65136c87051220f4ca4ac73a20574df6, type: 3}
+    power: 0
+    prefabID: 2
+    normalPrice: 0

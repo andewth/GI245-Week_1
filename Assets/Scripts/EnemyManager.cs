@@ -44,13 +44,22 @@ public class EnemyManager : MonoBehaviour
             if (m == null)
                 continue;
 
-            Debug.Log("Adding items to: " + m.name);
+            int itemCount = InventoryManager.instance.ItemData.Length;
+            if (itemCount == 0)
+                continue;
 
-            bool added0 = InventoryManager.instance.AddItem(m, 0); //Health Potion
-            bool added1 = InventoryManager.instance.AddItem(m, 1); //Sword
-            bool added2 = InventoryManager.instance.AddItem(m, 2); //Shield
+            // Random 1-3 items per enemy, can be duplicates or different items
+            int itemsToGive = Random.Range(1, 4); // 1 to 3 items
 
-            Debug.Log($"Items added to {m.name}: potion={added0}, sword={added1}, shield={added2}");
+            for (int i = 0; i < itemsToGive; i++)
+            {
+                int itemId = Random.Range(0, itemCount);
+                int slot = InventoryManager.instance.AddItem(m, itemId);
+                if (slot >= 0)
+                {
+                    Debug.Log($"Enemy {m.name} got item <color=green>{InventoryManager.instance.ItemData[itemId].itemName}</color> (id={itemId}) at slot <color=blue>{slot}</color>");
+                }
+            }
         }
     }
 }

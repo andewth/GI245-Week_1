@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3318772}
   - component: {fileID: 2345352}
   - component: {fileID: 64838601920321740}
+  - component: {fileID: 3424808330177538830}
   m_Layer: 8
   m_Name: SM_Wep_Goblin_Bone_Axe_01 1
   m_TagString: Item
@@ -113,3 +114,23 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 43868357210826470, guid: 34a352dd5dcf3834e8f6e8ab24055a0a, type: 2}
+--- !u!114 &3424808330177538830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 114634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f91a0f6d468c1fe41a36ac7dbde8d18a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ItemPick
+  item:
+    id: 5
+    itemName: Axe
+    type: 2
+    icon: {fileID: 21300000, guid: b5bd06dc71bdaf746966b96f4f5bdd51, type: 3}
+    power: 0
+    prefabID: 5
+    normalPrice: 0

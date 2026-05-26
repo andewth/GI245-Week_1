@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3310818}
   - component: {fileID: 2310330}
   - component: {fileID: 64997284033752016}
+  - component: {fileID: 4482432628057382715}
   m_Layer: 8
   m_Name: SM_Item_Potion_09 1
   m_TagString: Item
@@ -29,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -113,3 +114,23 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 43496736353234370, guid: f473478bbd742de4083729709114e625, type: 2}
+--- !u!114 &4482432628057382715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 138800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f91a0f6d468c1fe41a36ac7dbde8d18a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ItemPick
+  item:
+    id: 7
+    itemName: PotionB
+    type: 0
+    icon: {fileID: 21300000, guid: 8151948b6b149dd409bc75114a222f6b, type: 3}
+    power: 0
+    prefabID: 7
+    normalPrice: 0

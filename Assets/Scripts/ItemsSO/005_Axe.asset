@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4a375cfdb77d84b4aad3188352b46bb9, type: 3}
-  m_Name: 008_KnifeA
+  m_Name: 005_Axe
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  id: 8
-  itemName: Knife A
+  id: 5
+  itemName: Axe
   type: 2
-  icon: {fileID: 21300000, guid: 61105b610fc0df2478428f5ce9c9955c, type: 3}
-  power: 20
-  prefabID: 8
-  normalPrice: 35
+  icon: {fileID: 21300000, guid: e491743b2426822468a28c7da8bb303b, type: 3}
+  power: 15
+  prefabID: 5
+  normalPrice: 32

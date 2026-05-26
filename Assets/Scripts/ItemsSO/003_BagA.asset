@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4a375cfdb77d84b4aad3188352b46bb9, type: 3}
-  m_Name: 007_RingA
+  m_Name: 003_BagA
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  id: 7
-  itemName: RingA
+  id: 3
+  itemName: Bag Large
   type: 1
-  icon: {fileID: 21300000, guid: ad0afdc9f55435d42b174a2645088bd2, type: 3}
-  power: 0
-  prefabID: 7
-  normalPrice: 65
+  icon: {fileID: 21300000, guid: 6ffe32d23634eb94cb48b88390e27773, type: 3}
+  power: 20
+  prefabID: 3
+  normalPrice: 45

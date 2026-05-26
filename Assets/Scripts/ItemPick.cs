@@ -39,8 +39,10 @@ public class ItemPick : MonoBehaviour
         if (partyManager.SelectChars.Count == 0)
             return;
 
-        if (inventoryManager.AddItem(partyManager.SelectChars[0], item.ID))
+        int slot = inventoryManager.AddItem(partyManager.SelectChars[0], item.ID);
+        if (slot >= 0)
         {
+            Debug.Log($"Picked up <color=green>{item.ItemName}</color> placed in inventory slot <color=blue>{slot}</color>");
             Destroy(gameObject);
         }
     }

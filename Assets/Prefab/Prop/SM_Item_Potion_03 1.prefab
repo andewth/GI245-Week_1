@@ -105,10 +105,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemPick
   item:
-    id: 1
+    id: 0
     itemName: Potion
     type: 0
-    icon: {fileID: 21300000, guid: 71597b0e2385e5c4097f3b21fd250cbb, type: 3}
+    icon: {fileID: 21300000, guid: 881eedcd1dd35354ab5eb19ea799a3fa, type: 3}
     power: 0
     prefabID: 0
     normalPrice: 0

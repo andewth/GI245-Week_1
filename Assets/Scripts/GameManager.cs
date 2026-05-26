@@ -50,9 +50,9 @@ public class GameManager : MonoBehaviour
         
         if (InventoryManager.instance != null && InventoryManager.instance.ItemData != null && InventoryManager.instance.ItemData.Length > 0)
         {
-            bool added0 = InventoryManager.instance.AddItem(hero, 0);
-            bool added2 = InventoryManager.instance.AddItem(hero, 2);
-            Debug.Log("Player item 0 added: " + added0 + ", item 2 added: " + added2);
+            int slot0 = InventoryManager.instance.AddItem(hero, 0);
+            int slot2 = InventoryManager.instance.AddItem(hero, 2);
+            Debug.Log($"Player item 0 added at slot: <color=blue>{slot0}</color>, item 2 at slot: <color=blue>{slot2}</color>");
         }
         else
         {

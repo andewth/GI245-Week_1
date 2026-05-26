@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4a375cfdb77d84b4aad3188352b46bb9, type: 3}
-  m_Name: 004_KeyA
+  m_Name: 006_SwordB
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  id: 4
-  itemName: Key A
-  type: 1
-  icon: {fileID: 21300000, guid: d2658d7913a4f364993690919124dfcf, type: 3}
-  power: 0
-  prefabID: 4
-  normalPrice: 25
+  id: 6
+  itemName: SwordB
+  type: 2
+  icon: {fileID: 21300000, guid: 78b3e61a18006f24aadd25ddebf40b87, type: 3}
+  power: 18
+  prefabID: 6
+  normalPrice: 45

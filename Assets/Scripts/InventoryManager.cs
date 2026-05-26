@@ -28,22 +28,22 @@ public class InventoryManager : MonoBehaviour
    
 
 
-    public bool AddItem(Character character, int id)
+    public int AddItem(Character character, int id)
     {
         if (character == null)
         {
             Debug.LogWarning("AddItem failed: character is null");
-            return false;
+            return -1;
         }
         if (id < 0 || id >= itemData.Length)
         {
             Debug.LogWarning($"AddItem failed: id {id} out of range (itemData length = {itemData.Length})");
-            return false;
+            return -1;
         }
         if (itemData[id] == null)
         {
             Debug.LogWarning($"AddItem failed: itemData[{id}] is null. Please assign ItemData in InventoryManager Inspector.");
-            return false;
+            return -1;
         }
 
         Item item = new Item(itemData[id]);
@@ -53,11 +53,11 @@ public class InventoryManager : MonoBehaviour
             if (character.InventoryItems[i] == null)
             {
                 character.InventoryItems[i] = item;
-                return true;
+                return i;
             }
         }
         Debug.Log("Inventory Full");
-        return false;
+        return -1;
     }
 
 

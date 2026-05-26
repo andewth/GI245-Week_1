@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3367978}
   - component: {fileID: 2319392}
   - component: {fileID: 64330640073874316}
+  - component: {fileID: 3710309614466213503}
   m_Layer: 8
   m_Name: SM_Wep_Shield_Heater_02 1
   m_TagString: Item
@@ -113,3 +114,23 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 43320736389379132, guid: b50db3fb65c58294d81f7dddd14e1d2a, type: 2}
+--- !u!114 &3710309614466213503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 134266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f91a0f6d468c1fe41a36ac7dbde8d18a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ItemPick
+  item:
+    id: 4
+    itemName: ShieldB
+    type: 1
+    icon: {fileID: 21300000, guid: e8207d4cc22b0eb49a58f09a2253e275, type: 3}
+    power: 0
+    prefabID: 4
+    normalPrice: 0

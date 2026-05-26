@@ -25945,6 +25945,42 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3554787342938401500, guid: e1115885a263d8b4db984d1006a476b8, type: 3}
+      propertyPath: itemData.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3554787342938401500, guid: e1115885a263d8b4db984d1006a476b8, type: 3}
+      propertyPath: 'itemData.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 9b5862de54c6165429870d67d58eb398, type: 2}
+    - target: {fileID: 3554787342938401500, guid: e1115885a263d8b4db984d1006a476b8, type: 3}
+      propertyPath: 'itemData.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: d7f4283470d9bb747a73fac678866b56, type: 2}
+    - target: {fileID: 3554787342938401500, guid: e1115885a263d8b4db984d1006a476b8, type: 3}
+      propertyPath: 'itemData.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 8b75e22dbb5236749865c2ed1c8f0d84, type: 2}
+    - target: {fileID: 3554787342938401500, guid: e1115885a263d8b4db984d1006a476b8, type: 3}
+      propertyPath: 'itemData.Array.data[3]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 0922bfbf00eabb6458414c5739bb201c, type: 2}
+    - target: {fileID: 3554787342938401500, guid: e1115885a263d8b4db984d1006a476b8, type: 3}
+      propertyPath: 'itemData.Array.data[4]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 3c52eef1e7da7a2499bab460bdd79a7a, type: 2}
+    - target: {fileID: 3554787342938401500, guid: e1115885a263d8b4db984d1006a476b8, type: 3}
+      propertyPath: 'itemData.Array.data[5]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 574059c5e574d194e879258cf4e2e841, type: 2}
+    - target: {fileID: 3554787342938401500, guid: e1115885a263d8b4db984d1006a476b8, type: 3}
+      propertyPath: 'itemData.Array.data[6]'
+      value: 
+      objectReference: {fileID: 11400000, guid: d49a3f78e41ce834fba9e62e23ec0037, type: 2}
+    - target: {fileID: 3554787342938401500, guid: e1115885a263d8b4db984d1006a476b8, type: 3}
+      propertyPath: 'itemData.Array.data[7]'
+      value: 
+      objectReference: {fileID: 11400000, guid: a6bfd3dc2ed889245b8cad2073cbec59, type: 2}
     - target: {fileID: 3558681665991146867, guid: e1115885a263d8b4db984d1006a476b8, type: 3}
       propertyPath: m_Name
       value: GameManager
