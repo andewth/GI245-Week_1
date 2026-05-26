@@ -403,11 +403,11 @@ public abstract class Character : MonoBehaviour
     {
         if (vfxManager != null && curCharTarget != null)
         {
-            Vector3 chestPosition = curCharTarget.transform.position + new Vector3(0, 1.2f, 0);
+            Vector3 targetPosition = curCharTarget.transform.position + new Vector3(0, 0.8f, 0);
 
             vfxManager.ShootMagic(curMagicCast.ShootID,
-                                    transform.position,
-                                    chestPosition,
+                                    transform.position + new Vector3(0, 1.2f, 0),
+                                    targetPosition,
                                     curMagicCast.ShootTime);
         }
 
@@ -433,7 +433,7 @@ public abstract class Character : MonoBehaviour
 
         if (vfxManager != null)
             vfxManager.LoadMagic(curMagicCast.LoadID,
-                                transform.position,
+                                transform.position + new Vector3(0, 1.2f, 0),
                                 curMagicCast.LoadTime);
 
         yield return new WaitForSeconds(curMagicCast.LoadTime);

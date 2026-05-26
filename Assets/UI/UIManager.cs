@@ -258,12 +258,24 @@ public class UIManager : MonoBehaviour
         //Show Magic skill only the single selected hero
         Character hero = PartyManager.instance.SelectChars[0];
 
-        for (int i = 0; i < hero.MagicSkills.Count; i++)
+        int toggleCount = toggleMagic != null ? toggleMagic.Length : 0;
+        int skillCount = hero.MagicSkills != null ? hero.MagicSkills.Count : 0;
+        int count = Mathf.Min(skillCount, toggleCount);
+
+        for (int i = 0; i < count; i++)
         {
             toggleMagic[i].interactable = true;
             toggleMagic[i].isOn = false;
             toggleMagic[i].GetComponentInChildren<Text>().text = hero.MagicSkills[i].Name;
             toggleMagic[i].targetGraphic.GetComponent<Image>().sprite = hero.MagicSkills[i].Icon;
+        }
+
+        for (int i = count; i < toggleCount; i++)
+        {
+            toggleMagic[i].interactable = false;
+            toggleMagic[i].isOn = false;
+            toggleMagic[i].GetComponentInChildren<Text>().text = "";
+            toggleMagic[i].targetGraphic.GetComponent<Image>().sprite = null;
         }
     }
 

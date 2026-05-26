@@ -208,6 +208,43 @@ public class Hero : Character
                         if (uiManager != null)
                             uiManager.ShowMagicToggles();
                         break;
+
+                    case 13:
+                        if (VFXManager.Instance.MagicData.Length > 4)
+                            magicSkills.Add(new Magic(VFXManager.Instance.MagicData[4]));
+                        if (uiManager != null)
+                            uiManager.ShowMagicToggles();
+                        break;
+
+                    case 15:
+                        if (VFXManager.Instance.MagicData.Length > 5)
+                            magicSkills.Add(new Magic(VFXManager.Instance.MagicData[5]));
+                        if (uiManager != null)
+                            uiManager.ShowMagicToggles();
+                        break;
+
+                    case 17:
+                        if (VFXManager.Instance.MagicData.Length > 6)
+                            magicSkills.Add(new Magic(VFXManager.Instance.MagicData[6]));
+                        if (uiManager != null)
+                            uiManager.ShowMagicToggles();
+                        break;
+
+                    case 20:
+                        if (VFXManager.Instance.MagicData.Length > 7)
+                            magicSkills.Add(new Magic(VFXManager.Instance.MagicData[7]));
+                        if (uiManager != null)
+                            uiManager.ShowMagicToggles();
+                        break;
+
+                    case 23:
+                        if (VFXManager.Instance.MagicData.Length > 8)
+                            magicSkills.Add(new Magic(VFXManager.Instance.MagicData[8]));
+                        if (VFXManager.Instance.MagicData.Length > 9)
+                            magicSkills.Add(new Magic(VFXManager.Instance.MagicData[9]));
+                        if (uiManager != null)
+                            uiManager.ShowMagicToggles();
+                        break;
                 }
             }
         }

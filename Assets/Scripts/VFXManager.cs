@@ -40,7 +40,7 @@ public class VFXManager : MonoBehaviour
             return;
 
         GameObject objShoot = Instantiate(magicVFX[id], posA, Quaternion.identity);
-        objShoot.transform.position = Vector3.LerpUnclamped(posA, posB, time);
+        objShoot.transform.position = posB;
         Destroy(objShoot, time);
     }
 

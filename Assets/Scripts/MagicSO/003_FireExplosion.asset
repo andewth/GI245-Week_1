@@ -19,5 +19,5 @@ MonoBehaviour:
   power: 35
   loadTime: 3
   shootTime: 4
-  loadId: 0
-  shootId: 1
+  loadId: 3
+  shootId: 3
