@@ -383,6 +383,12 @@ public class PartyManager : MonoBehaviour
                         new Item(InventoryManager.instance.ItemData[itemId]);
             }
 
+            // Re-equip shield (slot 16) and weapon (slot 17) so the visual prefabs spawn on the hero
+            if (hero.InventoryItems.Length > 16 && hero.InventoryItems[16] != null)
+                hero.EquipShield(hero.InventoryItems[16]);
+            if (hero.InventoryItems.Length > 17 && hero.InventoryItems[17] != null)
+                hero.EquipWeapon(hero.InventoryItems[17]);
+
             hero.AttackDamage = heroData[i].attackDamage;
             hero.DefensePower = heroData[i].defensePower;
             hero.Exp = heroData[i].exp;

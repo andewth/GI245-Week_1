@@ -160,9 +160,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 574059c5e574d194e879258cf4e2e841, type: 2}
   - {fileID: 11400000, guid: d49a3f78e41ce834fba9e62e23ec0037, type: 2}
   - {fileID: 11400000, guid: a6bfd3dc2ed889245b8cad2073cbec59, type: 2}
-  - {fileID: 11400000, guid: 8afcb8a85cf5190459b0e9ac920f6fa0, type: 2}
-  - {fileID: 11400000, guid: 2a1e5c86b944c8a48aaf63e9337e7537, type: 2}
-  - {fileID: 11400000, guid: 91c1ad2373d2d1a4082fdeeda38efe02, type: 2}
   dropRadius: 2
 --- !u!114 &2404555328920952741
 MonoBehaviour:
