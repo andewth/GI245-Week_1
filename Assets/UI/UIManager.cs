@@ -4,6 +4,8 @@ using UnityEngine.InputSystem;
 using TMPro;
 using System;
 using System.Collections.Generic; // List [Need]
+using UnityEngine.UI;
+
 
 public class UIManager : MonoBehaviour
 {
@@ -20,6 +22,12 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Toggle[] toggleAvatar;
     public Toggle[] ToggleAvatar { get { return toggleAvatar; } set { toggleAvatar = value; } }
+
+    [SerializeField]
+    private TMP_Text[] toggleAvatarNameTexts;
+
+    [SerializeField]
+    private Image[] toggleAvatarImages;
 
 
     [SerializeField]
@@ -536,17 +544,57 @@ public class UIManager : MonoBehaviour
 
     public void MapToggleAvatar()
     {
-        foreach (Toggle t in toggleAvatar)
+        if (toggleAvatar == null || toggleAvatar.Length == 0)
+            return;
+
+        int toggleCount = toggleAvatar.Length;
+        int nameCount = toggleAvatarNameTexts != null ? toggleAvatarNameTexts.Length : 0;
+        int imageCount = toggleAvatarImages != null ? toggleAvatarImages.Length : 0;
+
+        for (int i = 0; i < toggleCount; i++)
+        {
+            Toggle t = toggleAvatar[i];
+            if (t == null)
+                continue;
+
             t.gameObject.SetActive(false);
+            t.SetIsOnWithoutNotify(false);
+
+            if (i < nameCount && toggleAvatarNameTexts[i] != null)
+                toggleAvatarNameTexts[i].text = string.Empty;
+
+            if (i < imageCount && toggleAvatarImages[i] != null)
+                toggleAvatarImages[i].sprite = null;
+        }
 
         if (PartyManager.instance.Members.Count == 0)
             return;
 
-        for (int i = 0; i < PartyManager.instance.Members.Count; i++)
+        int memberCount = PartyManager.instance.Members.Count;
+        int count = Mathf.Min(memberCount, toggleCount);
+
+        for (int i = 0; i < count; i++)
         {
-            toggleAvatar[i].gameObject.SetActive(true);
+            Toggle toggle = toggleAvatar[i];
+            if (toggle == null)
+                continue;
+
+            Character member = PartyManager.instance.Members[i];
+            if (member == null)
+                continue;
+
+            toggle.gameObject.SetActive(true);
+            toggle.SetIsOnWithoutNotify(false);
+
+            if (i < nameCount && toggleAvatarNameTexts[i] != null)
+                toggleAvatarNameTexts[i].text = member.CharName;
+
+            if (i < imageCount && toggleAvatarImages[i] != null)
+                toggleAvatarImages[i].sprite = member.AvatarPic;
         }
-        toggleAvatar[0].isOn = true; //Select first hero
+
+        if (count > 0 && toggleAvatar[0] != null)
+            toggleAvatar[0].isOn = true; //Select first hero
     }
 
 
