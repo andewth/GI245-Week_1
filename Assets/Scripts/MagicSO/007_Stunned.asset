@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MagicData
   id: 7
   magicName: Stunned
-  icon: {fileID: 21300000, guid: fc86e93418143484e987e71c8e5ab7ff, type: 3}
+  icon: {fileID: 21300000, guid: 516d46c4cd0a2b74bbacd6bb7de4fe25, type: 3}
   range: 10
   power: 35
   loadTime: 3

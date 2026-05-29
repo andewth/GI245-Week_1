@@ -2182,13 +2182,13 @@ MonoBehaviour:
   defensePower: 0
   exp: 0
   level: 1
-  strength: 10
-  dexterity: 17
-  constitution: 13
-  intelligence: 19
-  wisdom: 8
-  charisma: 12
-  nextExp: 30
+  strength: 9
+  dexterity: 15
+  constitution: 14
+  intelligence: 17
+  wisdom: 9
+  charisma: 13
+  nextExp: 28
   prefabId: 0
 --- !u!114 &-6058823864054036322
 MonoBehaviour:

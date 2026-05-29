@@ -266,7 +266,7 @@ public class UIManager : MonoBehaviour
         {
             toggleMagic[i].interactable = true;
             toggleMagic[i].isOn = false;
-            toggleMagic[i].GetComponentInChildren<Text>().text = hero.MagicSkills[i].Name;
+            // toggleMagic[i].GetComponentInChildren<Text>().text = hero.MagicSkills[i].Name;
             toggleMagic[i].targetGraphic.GetComponent<Image>().sprite = hero.MagicSkills[i].Icon;
         }
 
@@ -274,7 +274,7 @@ public class UIManager : MonoBehaviour
         {
             toggleMagic[i].interactable = false;
             toggleMagic[i].isOn = false;
-            toggleMagic[i].GetComponentInChildren<Text>().text = "";
+            // toggleMagic[i].GetComponentInChildren<Text>().text = "";
             toggleMagic[i].targetGraphic.GetComponent<Image>().sprite = null;
         }
     }

@@ -3362,14 +3362,14 @@ MonoBehaviour:
   defensePower: 0
   exp: 0
   level: 1
-  strength: 10
-  dexterity: 17
-  constitution: 13
-  intelligence: 19
-  wisdom: 8
-  charisma: 12
-  nextExp: 30
-  prefabId: 0
+  strength: 12
+  dexterity: 16
+  constitution: 11
+  intelligence: 14
+  wisdom: 9
+  charisma: 17
+  nextExp: 34
+  prefabId: 2
 --- !u!114 &2813491643755130303
 MonoBehaviour:
   m_ObjectHideFlags: 0

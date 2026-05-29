@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MagicData
   id: 3
   magicName: Fire Explosion
-  icon: {fileID: 21300000, guid: fc86e93418143484e987e71c8e5ab7ff, type: 3}
+  icon: {fileID: 21300000, guid: 0eba9cb32a719cc4997317cf1007b0cd, type: 3}
   range: 10
   power: 35
   loadTime: 3
